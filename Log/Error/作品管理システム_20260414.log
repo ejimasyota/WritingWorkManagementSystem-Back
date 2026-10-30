@@ -1,0 +1,3 @@
+[2026-04-14 16:45:12] 作品作成用メモ | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column "imgpath" does not exist
+LINE 7:             imgPath AS "ImgPath",
+                    ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0

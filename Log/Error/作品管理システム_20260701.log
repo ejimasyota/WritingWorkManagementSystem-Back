@@ -1,0 +1,4 @@
+[2026-07-01 20:16:36] 通知 | サマリ取得エラー | ユーザーID : Ejima0902 | error : データベース接続に失敗しました: SQLSTATE[08006] [7] connection to server at "153.121.67.237", port 5432 failed: No route to host
+	Is the server running on that host and accepting TCP/IP connections? | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-01 21:01:16] 通知 | サマリ取得エラー | ユーザーID : Ejima0902 | error : データベース接続に失敗しました: SQLSTATE[08006] [7] connection to server at "153.121.67.237", port 5432 failed: No route to host
+	Is the server running on that host and accepting TCP/IP connections? | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36

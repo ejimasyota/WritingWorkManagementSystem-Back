@@ -1,0 +1,18 @@
+[2026-03-24 11:45:26] キャラ設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column c.haircolor does not exist
+LINE 41:             c.hairColor AS "HairColor",
+                     ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0
+[2026-03-24 11:45:52] キャラ設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column c.haircolor does not exist
+LINE 41:             c.hairColor AS "HairColor",
+                     ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0
+[2026-03-24 11:46:09] キャラ設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column c.haircolor does not exist
+LINE 41:             c.hairColor AS "HairColor",
+                     ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0
+[2026-03-24 11:47:05] キャラ設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column c.haircolor does not exist
+LINE 41:             c.hairColor AS "HairColor",
+                     ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0
+[2026-03-24 11:47:20] キャラ設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column c.haircolor does not exist
+LINE 41:             c.hairColor AS "HairColor",
+                     ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0
+[2026-03-24 11:47:35] キャラ設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column c.haircolor does not exist
+LINE 41:             c.hairColor AS "HairColor",
+                     ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0

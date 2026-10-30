@@ -1,0 +1,84 @@
+[2026-01-27 09:39:34] AI相談 | API returned HTTP 403 | ユーザーID : Ejima0902 | error : {
+  "error": {
+    "code": 403,
+    "message": "Method doesn't allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API.",
+    "status": "PERMISSION_DENIED"
+  }
+}
+
+[2026-01-27 09:39:34] AI相談 | API Error | ユーザーID : Ejima0902 | error : HTTP Code: 403, Response: {
+  "error": {
+    "code": 403,
+    "message": "Method doesn't allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API.",
+    "status": "PERMISSION_DENIED"
+  }
+}
+
+[2026-01-27 09:41:03] AI相談 | API returned HTTP 403 | ユーザーID : Ejima0902 | error : {
+  "error": {
+    "code": 403,
+    "message": "Method doesn't allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API.",
+    "status": "PERMISSION_DENIED"
+  }
+}
+
+[2026-01-27 09:41:03] AI相談 | API Error | ユーザーID : Ejima0902 | error : HTTP Code: 403, Response: {
+  "error": {
+    "code": 403,
+    "message": "Method doesn't allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API.",
+    "status": "PERMISSION_DENIED"
+  }
+}
+
+[2026-01-27 09:50:03] AI相談 | API returned HTTP 403 | ユーザーID : Ejima0902 | error : {
+  "error": {
+    "code": 403,
+    "message": "Method doesn't allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API.",
+    "status": "PERMISSION_DENIED"
+  }
+}
+
+[2026-01-27 09:50:03] AI相談 | API Error | ユーザーID : Ejima0902 | error : HTTP Code: 403, Response: {
+  "error": {
+    "code": 403,
+    "message": "Method doesn't allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API.",
+    "status": "PERMISSION_DENIED"
+  }
+}
+
+[2026-01-27 10:01:05] AI相談 | API returned HTTP 403 | ユーザーID : Ejima0902 | error : {
+  "error": {
+    "code": 403,
+    "message": "Method doesn't allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API.",
+    "status": "PERMISSION_DENIED"
+  }
+}
+
+[2026-01-27 10:01:05] AI相談 | API Error | ユーザーID : Ejima0902 | error : HTTP Code: 403, Response: {
+  "error": {
+    "code": 403,
+    "message": "Method doesn't allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API.",
+    "status": "PERMISSION_DENIED"
+  }
+}
+
+[2026-01-27 10:02:00] AI相談 | API request failed (HTTP 500), retry 1 after 2s | ユーザーID : Ejima0902 | error : GEMINI_API_KEY is not set
+[2026-01-27 10:02:02] AI相談 | API request failed (HTTP 500), retry 2 after 4s | ユーザーID : Ejima0902 | error : GEMINI_API_KEY is not set
+[2026-01-27 10:02:06] AI相談 | API request failed (HTTP 500), retry 3 after 8s | ユーザーID : Ejima0902 | error : GEMINI_API_KEY is not set
+[2026-01-27 10:02:14] AI相談 | API Error | ユーザーID : Ejima0902 | error : HTTP Code: 500, Response: GEMINI_API_KEY is not set
+[2026-01-27 10:05:51] AI相談 | API request failed (HTTP 500), retry 1 after 2s | ユーザーID : Ejima0902 | error : GEMINI_API_KEY is not set
+[2026-01-27 10:05:53] AI相談 | API request failed (HTTP 500), retry 2 after 4s | ユーザーID : Ejima0902 | error : GEMINI_API_KEY is not set
+[2026-01-27 10:05:57] AI相談 | API request failed (HTTP 500), retry 3 after 8s | ユーザーID : Ejima0902 | error : GEMINI_API_KEY is not set
+[2026-01-27 10:06:05] AI相談 | API Error | ユーザーID : Ejima0902 | error : HTTP Code: 500, Response: GEMINI_API_KEY is not set
+[2026-01-27 10:07:52] AI相談 | API request failed (HTTP 500), retry 1 after 2s | ユーザーID : Ejima0902 | error : GEMINI_API_KEY is not set
+[2026-01-27 10:07:54] AI相談 | API request failed (HTTP 500), retry 2 after 4s | ユーザーID : Ejima0902 | error : GEMINI_API_KEY is not set
+[2026-01-27 10:07:58] AI相談 | API request failed (HTTP 500), retry 3 after 8s | ユーザーID : Ejima0902 | error : GEMINI_API_KEY is not set
+[2026-01-27 10:08:06] AI相談 | API Error | ユーザーID : Ejima0902 | error : HTTP Code: 500, Response: GEMINI_API_KEY is not set
+[2026-01-27 10:09:14] AI相談 | API request failed (HTTP 500), retry 1 after 2s | ユーザーID : Ejima0902 | error : GEMINI_API_KEY is not set
+[2026-01-27 10:09:15] AI相談 | API request failed (HTTP 500), retry 2 after 4s | ユーザーID : Ejima0902 | error : GEMINI_API_KEY is not set
+[2026-01-27 10:09:19] AI相談 | API request failed (HTTP 500), retry 3 after 8s | ユーザーID : Ejima0902 | error : GEMINI_API_KEY is not set
+[2026-01-27 10:09:27] AI相談 | API Error | ユーザーID : Ejima0902 | error : HTTP Code: 500, Response: GEMINI_API_KEY is not set
+[2026-01-27 10:15:24] AI相談 | API request failed (HTTP 500), retry 1 after 2s | ユーザーID : Ejima0902 | error : GEMINI_API_KEY is not set
+[2026-01-27 10:15:26] AI相談 | API request failed (HTTP 500), retry 2 after 4s | ユーザーID : Ejima0902 | error : GEMINI_API_KEY is not set
+[2026-01-27 10:15:29] AI相談 | API request failed (HTTP 500), retry 3 after 8s | ユーザーID : Ejima0902 | error : GEMINI_API_KEY is not set
+[2026-01-27 10:15:37] AI相談 | API Error | ユーザーID : Ejima0902 | error : HTTP Code: 500, Response: GEMINI_API_KEY is not set

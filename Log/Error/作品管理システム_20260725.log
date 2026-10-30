@@ -1,0 +1,47 @@
+[2026-07-25 14:19:11] WBS | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column w.parentindexnum does not exist
+LINE 21:             COALESCE(w.parentIndexNum, w.indexNum) ASC,
+                              ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0
+[2026-07-25 14:19:15] WBS | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column w.parentindexnum does not exist
+LINE 21:             COALESCE(w.parentIndexNum, w.indexNum) ASC,
+                              ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0
+[2026-07-25 14:20:17] WBS | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column w.parentindexnum does not exist
+LINE 21:             COALESCE(w.parentIndexNum, w.indexNum) ASC,
+                              ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0
+[2026-07-25 14:29:13] WBS | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column w.parentindexnum does not exist
+LINE 21:             COALESCE(w.parentIndexNum, w.indexNum) ASC,
+                              ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0
+[2026-07-25 14:29:36] WBS | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column w.parentindexnum does not exist
+LINE 21:             COALESCE(w.parentIndexNum, w.indexNum) ASC,
+                              ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0
+[2026-07-25 14:29:40] WBS | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column w.parentindexnum does not exist
+LINE 21:             COALESCE(w.parentIndexNum, w.indexNum) ASC,
+                              ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0
+[2026-07-25 14:47:23] WBS | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column w.parentindexnum does not exist
+LINE 21:             COALESCE(w.parentIndexNum, w.indexNum) ASC,
+                              ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0
+[2026-07-25 14:47:27] WBS | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column w.parentindexnum does not exist
+LINE 21:             COALESCE(w.parentIndexNum, w.indexNum) ASC,
+                              ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0
+[2026-07-25 15:07:02] WBS | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column w.parentindexnum does not exist
+LINE 21:             COALESCE(w.parentIndexNum, w.indexNum) ASC,
+                              ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0
+[2026-07-25 15:09:35] WBS | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column w.parentindexnum does not exist
+LINE 21:             COALESCE(w.parentIndexNum, w.indexNum) ASC,
+                              ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0
+[2026-07-25 15:09:44] WBS | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column w.parentindexnum does not exist
+LINE 21:             COALESCE(w.parentIndexNum, w.indexNum) ASC,
+                              ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0
+[2026-07-25 15:27:33] WBS Excel出力 | PhpSpreadsheet未導入 | ユーザーID : Ejima0902 | error :  | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0
+[2026-07-25 15:44:10] WBS Excel出力 | PhpSpreadsheet未導入 | ユーザーID : Ejima0902 | error :  | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0
+[2026-07-25 15:55:11] 通知 | サマリ取得エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "wbstaskassignee" does not exist
+LINE 24:             JOIN WbsTaskAssignee ta ON ta.taskId = w.taskId
+                          ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0
+[2026-07-25 15:55:15] WBS | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "wbstaskassignee" does not exist
+LINE 3:         FROM WbsTaskAssignee a
+                     ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0
+[2026-07-25 15:55:17] 通知 | サマリ取得エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "wbstaskassignee" does not exist
+LINE 24:             JOIN WbsTaskAssignee ta ON ta.taskId = w.taskId
+                          ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0
+[2026-07-25 15:55:18] WBS | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "wbstaskassignee" does not exist
+LINE 3:         FROM WbsTaskAssignee a
+                     ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0

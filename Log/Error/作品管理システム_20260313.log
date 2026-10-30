@@ -1,0 +1,16 @@
+[2026-03-13 11:51:07] ストーリー作成 | 保存処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "storyrows_storyid_indexnum_key"
+DETAIL:  Key (storyid, indexnum)=(12, 2) already exists.
+[2026-03-13 11:51:16] ストーリー作成 | 保存処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "storyrows_storyid_indexnum_key"
+DETAIL:  Key (storyid, indexnum)=(12, 2) already exists.
+[2026-03-13 11:51:50] ストーリー作成 | 保存処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "storyrows_storyid_indexnum_key"
+DETAIL:  Key (storyid, indexnum)=(12, 2) already exists.
+[2026-03-13 11:52:30] プロット作成 | 保存処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "plotrows_plotid_indexnum_key"
+DETAIL:  Key (plotid, indexnum)=(10, 1) already exists.
+[2026-03-13 11:52:40] プロット作成 | 保存処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "plotrows_plotid_indexnum_key"
+DETAIL:  Key (plotid, indexnum)=(10, 1) already exists.
+[2026-03-13 11:54:39] プロット作成 | 保存処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "plotrows_plotid_indexnum_key"
+DETAIL:  Key (plotid, indexnum)=(10, 1) already exists.
+[2026-03-13 11:54:48] プロット作成 | 保存処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "plotrows_plotid_indexnum_key"
+DETAIL:  Key (plotid, indexnum)=(10, 1) already exists.
+[2026-03-13 11:55:02] プロット作成 | 保存処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "plotrows_plotid_indexnum_key"
+DETAIL:  Key (plotid, indexnum)=(10, 1) already exists.

@@ -1,0 +1,4 @@
+[2026-02-10 14:06:48] 相関図作成 | 関係線保存処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table "relationinfo" violates foreign key constraint "fk_rel_source"
+DETAIL:  Key (sourceobjid)=(37) is not present in table "relationobjectinfo".
+[2026-02-10 14:16:25] 相関図作成 | 関係線保存処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table "relationinfo" violates foreign key constraint "fk_rel_source"
+DETAIL:  Key (sourceobjid)=(37) is not present in table "relationobjectinfo".

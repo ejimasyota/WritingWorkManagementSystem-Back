@@ -1,0 +1,1 @@
+[2026-10-16 13:26:08] 掛け合い | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "." LINE 13:         ORDER BY .exchangeName ASC                           ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0

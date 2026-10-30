@@ -1,0 +1,14 @@
+# このディレクトリは .env（DB認証情報・APIキー・署名鍵）を含むため
+# Web からの直接アクセスを全面的に拒否する。
+# ※Apache でのみ有効。nginx の場合は server/location 設定側で遮断すること。
+
+# Apache 2.4
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+
+# Apache 2.2 以前へのフォールバック
+<IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+</IfModule>

@@ -1,0 +1,6 @@
+[2026-08-20 18:33:05] キャラ設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column c.initialstate does not exist
+LINE 53:             c.initialState AS "InitialState",
+                     ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0
+[2026-08-20 18:33:10] キャラ設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column c.initialstate does not exist
+LINE 53:             c.initialState AS "InitialState",
+                     ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0

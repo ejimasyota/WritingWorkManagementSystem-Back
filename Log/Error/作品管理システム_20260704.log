@@ -1,0 +1,5 @@
+[2026-07-04 16:57:08] 参加URL発行 | 発行処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "participationtoken" does not exist
+LINE 2:         INSERT INTO ParticipationToken (token, workId, expir...
+                            ^ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-04 16:58:14] プロジェクト参加 | 参加処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for type uuid: "053a1699-4267-40a8-afae-3a9e195b626"
+CONTEXT:  unnamed portal parameter $1 = '...' | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0

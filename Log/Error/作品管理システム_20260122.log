@@ -1,0 +1,6 @@
+[2026-01-22 09:29:51] 作中用語設定 | 一覧取得処理エラー | ユーザーID : Ejimasyot@09 | error : SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "terminfo" does not exist
+LINE 11:         FROM TermInfo t
+                      ^
+[2026-01-22 09:30:33] 作中用語設定 | 一覧取得処理エラー | ユーザーID : Ejimasyot@09 | error : SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "terminfo" does not exist
+LINE 11:         FROM TermInfo t
+                      ^

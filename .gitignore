@@ -1,0 +1,10 @@
+# logs
+Back/Log/
+*.log
+*.log.save
+
+# uploads
+Uploads/
+
+# env
+Back/Config/.env

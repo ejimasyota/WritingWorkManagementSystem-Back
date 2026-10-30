@@ -1,0 +1,1 @@
+[2026-09-14 17:44:51] ストーリー作成 | 取込処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[22021]: Character not in repertoire: 7 ERROR:  invalid byte sequence for encoding "UTF8": 0x83 CONTEXT:  unnamed portal parameter $3 | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0

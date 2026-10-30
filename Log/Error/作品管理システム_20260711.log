@@ -1,0 +1,50 @@
+[2026-07-11 10:04:25] AI相談 | API returned HTTP 403 | ユーザーID : Ejima0902 | error : {
+  "error": {
+    "code": 403,
+    "message": "Permission denied: Consumer 'api_key:AIzaSyDCQ6d8t9lVQU6z04YkmzdE9qw1rJzI_9A' has been suspended.",
+    "status": "PERMISSION_DENIED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "CONSUMER_SUSPENDED",
+        "domain": "googleapis.com",
+        "metadata": {
+          "containerInfo": "api_key:AIzaSyDCQ6d8t9lVQU6z04YkmzdE9qw1rJzI_9A",
+          "service": "generativelanguage.googleapis.com",
+          "consumer": "projects/726918474203"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.LocalizedMessage",
+        "locale": "en-US",
+        "message": "Permission denied: Consumer 'api_key:AIzaSyDCQ6d8t9lVQU6z04YkmzdE9qw1rJzI_9A' has been suspended."
+      }
+    ]
+  }
+}
+ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0
+[2026-07-11 10:04:25] AI相談 | API Error | ユーザーID : Ejima0902 | error : HTTP Code: 403, Response: {
+  "error": {
+    "code": 403,
+    "message": "Permission denied: Consumer 'api_key:AIzaSyDCQ6d8t9lVQU6z04YkmzdE9qw1rJzI_9A' has been suspended.",
+    "status": "PERMISSION_DENIED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "CONSUMER_SUSPENDED",
+        "domain": "googleapis.com",
+        "metadata": {
+          "containerInfo": "api_key:AIzaSyDCQ6d8t9lVQU6z04YkmzdE9qw1rJzI_9A",
+          "service": "generativelanguage.googleapis.com",
+          "consumer": "projects/726918474203"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.LocalizedMessage",
+        "locale": "en-US",
+        "message": "Permission denied: Consumer 'api_key:AIzaSyDCQ6d8t9lVQU6z04YkmzdE9qw1rJzI_9A' has been suspended."
+      }
+    ]
+  }
+}
+ | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0

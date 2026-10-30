@@ -1,0 +1,1 @@
+[2026-06-13 14:20:31] 能力設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : データベース接続に失敗しました: SQLSTATE[08006] [7] connection to server at "153.121.67.237", port 5432 failed: timeout expired | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0

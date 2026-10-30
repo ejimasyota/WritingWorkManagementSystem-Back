@@ -1,0 +1,13 @@
+# このディレクトリは Web から直接アクセスされる必要がないため全面拒否する。
+# （アプリからは require_once のファイルパス経由で読み込むため影響なし）
+
+# Apache 2.4
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+
+# Apache 2.2 以前へのフォールバック
+<IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+</IfModule>

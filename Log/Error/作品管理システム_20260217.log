@@ -1,0 +1,5 @@
+[2026-02-17 13:02:13] キャラ設定 | 一覧取得処理エラー | ユーザーID :  | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column c.furigana does not exist
+LINE 39:             c.furigana AS "Furigana",
+                     ^
+[2026-02-17 13:08:44] 年表設定 | 保存処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for type bigint: "1868-10-23"
+[2026-02-17 13:09:08] 年表設定 | 保存処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for type bigint: "1868-10-23"

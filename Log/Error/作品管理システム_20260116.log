@@ -1,0 +1,3 @@
+[2026-01-16 18:56:11] 作品一覧管理 | 一覧取得処理エラー | ユーザーID : Ejimasyot@09 | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column "roletype" does not exist
+LINE 1: SELECT roleType FROM UserInfo WHERE userId = $1
+               ^

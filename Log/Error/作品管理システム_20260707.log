@@ -1,0 +1,85 @@
+[2026-07-07 21:27:40] 通知 | サマリ取得エラー | ユーザーID : Ejima0902 | error : データベース接続に失敗しました: SQLSTATE[08006] [7] connection to server at "153.121.67.237", port 5432 failed: timeout expired | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:33:21] 組織設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:33:22] 種族設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:33:54] 能力設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : データベース接続に失敗しました: SQLSTATE[08006] [7] connection to server at "153.121.67.237", port 5432 failed: timeout expired | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:34:25] 階級設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : データベース接続に失敗しました: SQLSTATE[08006] [7] connection to server at "153.121.67.237", port 5432 failed: timeout expired | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:34:56] 技設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : データベース接続に失敗しました: SQLSTATE[08006] [7] connection to server at "153.121.67.237", port 5432 failed: timeout expired | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:34:59] キャラ設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:35:08] 組織設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:35:11] 種族設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:35:13] 能力設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:35:20] キャラ設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:35:37] 組織設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:35:38] 種族設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:35:41] 能力設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:35:48] キャラ設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:43:50] 通知 | サマリ取得エラー | ユーザーID : Ejima0902 | error : データベース接続に失敗しました: SQLSTATE[08006] [7] connection to server at "153.121.67.237", port 5432 failed: timeout expired | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:43:54] 組織設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:43:58] 種族設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:44:30] 能力設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : データベース接続に失敗しました: SQLSTATE[08006] [7] connection to server at "153.121.67.237", port 5432 failed: timeout expired | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:44:36] キャラ設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:44:46] 組織設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:44:53] 種族設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:44:55] 能力設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:45:00] キャラ設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:45:11] 組織設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:45:16] 種族設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:45:57] ログイン | ログイン処理エラー | ユーザーID : Ejima0902 | error : データベース接続に失敗しました: SQLSTATE[08006] [7] connection to server at "153.121.67.237", port 5432 failed: timeout expired | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:46:33] 組織設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 21:46:35] 種族設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 22:24:13] 組織設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 22:24:16] 種族設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 22:24:18] 能力設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0
+[2026-07-07 22:24:24] キャラ設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0

@@ -1,0 +1,33 @@
+[2026-05-16 21:10:45] ストーリー作成 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0
+[2026-05-16 21:10:57] ストーリー作成 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0
+[2026-05-16 21:10:58] ストーリー作成 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0
+[2026-05-16 21:11:28] ストーリー作成 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0
+[2026-05-16 21:20:02] ストーリー作成 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0
+[2026-05-16 21:20:22] ストーリー作成 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0
+[2026-05-16 21:20:50] キャラ設定 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0
+[2026-05-16 21:20:52] 相関図作成 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0
+[2026-05-16 21:20:56] ストーリー作成 | 一覧取得処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[HY000]: General error: 7 server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0
+[2026-05-16 21:48:56] キーワード検索 | 検索処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[22025]: Invalid escape sequence: 7 ERROR:  invalid escape string
+HINT:  Escape string must be empty or one character. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0
+[2026-05-16 21:53:59] キーワード検索 | 検索処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[22025]: Invalid escape sequence: 7 ERROR:  invalid escape string
+HINT:  Escape string must be empty or one character. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0
+[2026-05-16 21:55:28] キーワード検索 | 検索処理エラー | ユーザーID : Ejima0902 | error : SQLSTATE[22025]: Invalid escape sequence: 7 ERROR:  invalid escape string
+HINT:  Escape string must be empty or one character. | UA : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0

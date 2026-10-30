@@ -1,0 +1,201 @@
+[2026-01-26 09:31:55] 作品情報取得 | 取得処理エラー | ユーザーID :  | error : SQLSTATE[42P01]: Undefined table: 7 ERROR:  missing FROM-clause entry for table "w"
+LINE 12:         WHERE W.workId = $1
+                       ^
+[2026-01-26 10:33:25] AI相談履歴取得 | 取得処理エラー | ユーザーID :  | error : SQLSTATE[42703]: Undefined column: 7 ERROR:  column c.convid does not exist
+LINE 3:             c.convId AS "ConvId",
+                    ^
+HINT:  Perhaps you meant to reference the column "c.workid".
+[2026-01-26 10:40:23] AI相談 | 会話処理エラー | ユーザーID : Ejimasyot@09 | error : SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "terminfo" does not exist
+LINE 1: SELECT termName, description FROM TermInfo WHERE workId = $1...
+                                          ^
+[2026-01-26 10:42:46] AI相談 | 会話処理エラー | ユーザーID : Ejimasyot@09 | error : SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "terminfo" does not exist
+LINE 1: SELECT termName, description FROM TermInfo WHERE workId = $1...
+                                          ^
+[2026-01-26 10:44:16] AI相談 | Gemini API Error | ユーザーID : Ejimasyot@09 | error : HTTP Code: 404, Response: {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-01-26 10:46:47] AI相談 | Gemini API Error | ユーザーID : Ejimasyot@09 | error : HTTP Code: 400, Response: {
+  "error": {
+    "code": 400,
+    "message": "Invalid JSON payload received. Unknown name \"systemInstruction\": Cannot find field.",
+    "status": "INVALID_ARGUMENT",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.BadRequest",
+        "fieldViolations": [
+          {
+            "description": "Invalid JSON payload received. Unknown name \"systemInstruction\": Cannot find field."
+          }
+        ]
+      }
+    ]
+  }
+}
+
+[2026-01-26 10:47:58] AI相談 | Gemini API Error | ユーザーID : Ejimasyot@09 | error : HTTP Code: 400, Response: {
+  "error": {
+    "code": 400,
+    "message": "Invalid JSON payload received. Unknown name \"systemInstruction\": Cannot find field.",
+    "status": "INVALID_ARGUMENT",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.BadRequest",
+        "fieldViolations": [
+          {
+            "description": "Invalid JSON payload received. Unknown name \"systemInstruction\": Cannot find field."
+          }
+        ]
+      }
+    ]
+  }
+}
+
+[2026-01-26 10:50:36] AI相談 | Gemini API Error | ユーザーID : Ejimasyot@09 | error : HTTP Code: 404, Response: {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-1.0-pro is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-01-26 11:02:55] AI相談 | Gemini API Error | ユーザーID : Ejimasyot@09 | error : HTTP Code: 404, Response: {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-1.5-flash-latest is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-01-26 11:04:48] AI相談 | Gemini API Bad Request | ユーザーID : Ejimasyot@09 | error : HTTP Code: 400, Response: {
+  "error": {
+    "code": 400,
+    "message": "Invalid JSON payload received. Unknown name \"systemInstruction\": Cannot find field.",
+    "status": "INVALID_ARGUMENT",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.BadRequest",
+        "fieldViolations": [
+          {
+            "description": "Invalid JSON payload received. Unknown name \"systemInstruction\": Cannot find field."
+          }
+        ]
+      }
+    ]
+  }
+}
+, Request: {"contents":[{"role":"user","parts":[{"text":"\u3069\u3046\uff1f"}]}],"systemInstruction":{"parts":[{"text":"\u3042\u306a\u305f\u306f\u5275\u4f5c\u6d3b\u52d5\u3092\u652f\u63f4\u3059\u308bAI\u30a2\u30b7\u30b9\u30bf\u30f3\u30c8\u3067\u3059\u3002\u4f5c\u54c1\u306e\u8a2d\u5b9a\u3001\u30ad\u30e3\u30e9\u30af\u30bf\u30fc\u3001\u30b9\u30c8\u30fc\u30ea\u30fc\u306b\u3064\u3044\u3066\u306e\u30a2\u30c9\u30d0\u30a4\u30b9\u3092\u63d0\u4f9b\u3057\u307e\u3059\u3002\u4e01\u5be7\u3067\u89aa\u3057\u307f\u3084\u3059\u3044\u53e3\u8abf\u3067\u56de\u7b54\u3057\u3066\u304f\u3060\u3055\u3044\u3002\n\n\u4ee5\u4e0b\u306f\u73fe\u5728\u306e\u4f5c\u54c1\u8a2d\u5b9a\u60c5\u5831\u3067\u3059\u3002\u3053\u306e\u60c5\u5831\u3092\u53c2\u8003\u306b\u56de\u7b54\u3057\u3066\u304f\u3060\u3055\u3044\uff1a\n\u3010\u4f5c\u54c1\u30bf\u30a4\u30c8\u30eb\u3011\u3082\u306e\u306e\u3051\u59eb\n\u3010\u767b\u5834\u30ad\u30e3\u30e9\u30af\u30bf\u30fc\u3011xcx\u3001\u30b5\u30f3\u30d4\u30f3\u30ad\u30e3\u30f3\u30d7\u3001s\u3001x\uff53\uff53\uff53\n\u3010\u7d44\u7e54\u3011\u30a2\u30c8\u30e0006\u3001\u5b88\u8b77\u5929\u4f7f\u516d\u82b1\u56e3\u3001\u30a2\u30ea\u30b9\u30c8\u9a0e\u58eb\u56e3\n\u3010\u821e\u53f0\u3011sdsds\u3001s\n\u3010\u4e3b\u306a\u51fa\u6765\u4e8b\u3011\u30aa\u30c3\u30af\u30b9\u30ec\u30a4\u30c8"}]},"generationConfig":{"temperature":0.7,"maxOutputTokens":2048}}
+[2026-01-26 11:06:59] AI相談 | Gemini API Error | ユーザーID : Ejimasyot@09 | error : HTTP Code: 404, Response: {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-1.5-flash is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+[2026-01-26 11:14:24] AI相談 | Gemini API Bad Request | ユーザーID : Ejimasyot@09 | error : HTTP Code: 400, Response: {
+  "error": {
+    "code": 400,
+    "message": "Invalid JSON payload received. Unknown name \"system_instruction\": Cannot find field.",
+    "status": "INVALID_ARGUMENT",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.BadRequest",
+        "fieldViolations": [
+          {
+            "description": "Invalid JSON payload received. Unknown name \"system_instruction\": Cannot find field."
+          }
+        ]
+      }
+    ]
+  }
+}
+, Request: {"contents":[{"role":"user","parts":[{"text":"どう？"}]}],"system_instruction":{"parts":[{"text":"あなたは創作活動を支援するAIアシスタントです。作品の設定、キャラクター、ストーリーについてのアドバイスを提供します。丁寧で親しみやすい口調で回答してください。\n\n以下は現在の作品設定情報です。この情報を参考に回答してください：\n【作品タイトル】もののけ姫\n【登場キャラクター】xcx、サンピンキャンプ、s、xｓｓｓ\n【組織】アトム006、守護天使六花団、アリスト騎士団\n【舞台】sdsds、s\n【主な出来事】オックスレイト"}]},"generationConfig":{"temperature":0.7,"maxOutputTokens":65536,"topP":0.95,"topK":64}}
+[2026-01-26 11:15:42] AI相談 | Gemini API Error | ユーザーID : Ejimasyot@09 | error : HTTP Code: 404, Response: 
+[2026-01-26 11:19:22] AI相談 | Gemini API Error | ユーザーID : Ejimasyot@09 | error : HTTP Code: 404, Response: 
+[2026-01-26 11:21:09] AI相談 | Gemini API Bad Request | ユーザーID : Ejimasyot@09 | error : HTTP Code: 400, Response: {
+  "error": {
+    "code": 400,
+    "message": "Invalid JSON payload received. Unknown name \"messages\": Cannot find field.\nInvalid JSON payload received. Unknown name \"temperature\": Cannot find field.\nInvalid JSON payload received. Unknown name \"maxOutputTokens\": Cannot find field.\nInvalid JSON payload received. Unknown name \"topP\": Cannot find field.\nInvalid JSON payload received. Unknown name \"topK\": Cannot find field.",
+    "status": "INVALID_ARGUMENT",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.BadRequest",
+        "fieldViolations": [
+          {
+            "description": "Invalid JSON payload received. Unknown name \"messages\": Cannot find field."
+          },
+          {
+            "description": "Invalid JSON payload received. Unknown name \"temperature\": Cannot find field."
+          },
+          {
+            "description": "Invalid JSON payload received. Unknown name \"maxOutputTokens\": Cannot find field."
+          },
+          {
+            "description": "Invalid JSON payload received. Unknown name \"topP\": Cannot find field."
+          },
+          {
+            "description": "Invalid JSON payload received. Unknown name \"topK\": Cannot find field."
+          }
+        ]
+      }
+    ]
+  }
+}
+, Request: {"messages":[{"role":"system","content":[{"type":"text","text":"あなたは創作活動を支援するAIアシスタントです。作品の設定、キャラクター、ストーリーについてのアドバイスを提供します。丁寧で親しみやすい口調で回答してください。\n\n以下は現在の作品設定情報です。この情報を参考に回答してください：\n【作品タイトル】もののけ姫\n【登場キャラクター】xcx、サンピンキャンプ、s、xｓｓｓ\n【組織】アトム006、守護天使六花団、アリスト騎士団\n【舞台】sdsds、s\n【主な出来事】オックスレイト"}]},{"role":"user","content":[{"type":"text","text":"どう？"}]}],"temperature":0.7,"maxOutputTokens":65536,"topP":0.95,"topK":64}
+[2026-01-26 11:24:10] AI相談 | Gemini API Bad Request | ユーザーID : Ejimasyot@09 | error : HTTP Code: 400, Response: {
+  "error": {
+    "code": 400,
+    "message": "Please use a valid role: user, model.",
+    "status": "INVALID_ARGUMENT"
+  }
+}
+, Request: {"contents":[{"role":"system","parts":[{"text":"あなたは創作活動を支援するAIアシスタントです。作品の設定、キャラクター、ストーリーについてのアドバイスを提供します。丁寧で親しみやすい口調で回答してください。\n\n以下は現在の作品設定情報です。この情報を参考に回答してください：\n【作品タイトル】もののけ姫\n【登場キャラクター】xcx、サンピンキャンプ、s、xｓｓｓ\n【組織】アトム006、守護天使六花団、アリスト騎士団\n【舞台】sdsds、s\n【主な出来事】オックスレイト"}]},{"role":"user","parts":[{"text":"どう？"}]}],"generationConfig":{"temperature":0.7,"maxOutputTokens":32768,"topP":0.95,"topK":64}}
+[2026-01-26 13:59:49] AI相談 | API request failed (HTTP 429), retry 1 after 2s | ユーザーID : Ejima0902 | error : {
+    "error": {
+        "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+        "type": "insufficient_quota",
+        "param": null,
+        "code": "insufficient_quota"
+    }
+}
+
+[2026-01-26 13:59:52] AI相談 | API request failed (HTTP 429), retry 2 after 4s | ユーザーID : Ejima0902 | error : {
+    "error": {
+        "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+        "type": "insufficient_quota",
+        "param": null,
+        "code": "insufficient_quota"
+    }
+}
+
+[2026-01-26 13:59:56] AI相談 | API request failed (HTTP 429), retry 3 after 8s | ユーザーID : Ejima0902 | error : {
+    "error": {
+        "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+        "type": "insufficient_quota",
+        "param": null,
+        "code": "insufficient_quota"
+    }
+}
+
+[2026-01-26 14:00:04] AI相談 | OpenAI API Rate Limit | ユーザーID : Ejima0902 | error : HTTP 429: {
+    "error": {
+        "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+        "type": "insufficient_quota",
+        "param": null,
+        "code": "insufficient_quota"
+    }
+}
+
+[2026-01-26 14:13:30] AI相談 | Gemini API Error | ユーザーID : Ejima0902 | error : HTTP Code: 403, Response: {
+  "error": {
+    "code": 403,
+    "message": "Your API key was reported as leaked. Please use another API key.",
+    "status": "PERMISSION_DENIED"
+  }
+}
+
