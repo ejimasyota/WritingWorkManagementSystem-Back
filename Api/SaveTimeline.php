@@ -14,6 +14,7 @@ require_once __DIR__ . '/../Common/HistoryDetail.php';
 require_once __DIR__ . '/../Common/ChapterOrder.php';
 // 日付文字列の日数計算（年表詳細の追従移動に使用）
 require_once __DIR__ . '/../Common/DateUtil.php';
+require_once __DIR__ . '/../Common/TimelineDetails.php';
 
 // POSTメソッドのみ許可
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -139,9 +140,20 @@ function SaveTimeline(): void
             return;
         }
 
+        // 詳細が指定された場合は、親と詳細を一括で検証・保存する。
+        // 旧クライアントの親のみの更新では従来の詳細日付追従を維持する。
+        $HasDetails = array_key_exists('Details', $Input);
+        $Details = $HasDetails ? TimelineDetails::Validate($Input['Details'], $Input['DetailsSnapshot'] ?? null,
+            $EventDate, $EndDate ?: null) : [];
+        if ($HasDetails && empty($TimeId) && !empty($Input['DetailsSnapshot'])) {
+            throw new InvalidArgumentException('新規年表の詳細読込情報が不正です');
+        }
+
         /** DB接続 */
         $Pdo = Database::GetConnection();
         Database::BeginTransaction();
+        // チャプター保存・順序更新と同じ順序でロックする。親年表の行ロックより先に取得する。
+        ChapterOrder::Lock($Pdo, (string) $WorkId);
 
         /** 元号自動判定: EventDateから年を抽出し、CalendarInfoと照合 */
         $EventYear = preg_replace('/[^0-9]/', '', $EventDate);
@@ -234,6 +246,7 @@ function SaveTimeline(): void
                 SELECT t.title, t.eventDate, t.endDate, t.content
                 FROM TimelineInfo t
                 WHERE t.timeId = :timeId AND t.workId = :workId
+                FOR UPDATE
             ");
             $OldRowStmt->execute([':timeId' => $TimeId, ':workId' => $WorkId]);
             $OldRow = $OldRowStmt->fetch() ?: [];
@@ -303,10 +316,14 @@ function SaveTimeline(): void
              * 移動量0で丸め処理を通す。 */
             $ShiftDays = DateUtil::DiffDays($OldRow['eventdate'] ?? null, $EventDate) ?? 0;
             $IsEndDateChanged = (string) ($OldRow['enddate'] ?? '') !== (string) ($EndDate ?? '');
-            if ($ShiftDays !== 0 || $IsEndDateChanged) {
+            if (!$HasDetails && ($ShiftDays !== 0 || $IsEndDateChanged)) {
                 ShiftTimelineEventDates($Pdo, $WorkId, $TimeId, $ShiftDays, $EndDate, $UserId);
             }
         }
+
+        $SavedDetails = $HasDetails
+            ? TimelineDetails::Save($Pdo, $WorkId, $NewTimeId, $UserId, $Details, $Input['DetailsSnapshot'])
+            : null;
 
         /* チャプターの並び順を正規化
          * 年表ありカード同士の相対順序は年表の発生時期順が正のため、
@@ -352,13 +369,18 @@ function SaveTimeline(): void
 
         Response::Success([
             'TimeId' => $NewTimeId,
+            'Details' => $SavedDetails,
             'UpdateDate' => $NewUpdateDate,
             'Message' => '年表を' . $Operation . 'しました'
         ]);
 
+    } catch (InvalidArgumentException $E) {
+        Database::Rollback();
+        Response::Error($E->getMessage());
     } catch (Exception $E) {
         Database::Rollback();
         Logger::Error($FunctionName, '保存処理エラー', $UserId, $E->getMessage());
+        if ($E->getCode() === 409) Response::ConflictError();
         Response::Error('年表の保存に失敗しました');
     }
 }

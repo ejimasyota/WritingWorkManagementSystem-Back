@@ -51,6 +51,8 @@ function DeleteTimeline(): void
         /** DB接続 */
         $Pdo = Database::GetConnection();
         Database::BeginTransaction();
+        // 年表・チャプター共通で、作品の並び順ロックを行ロックより先に取得する。
+        ChapterOrder::Lock($Pdo, (string) $WorkId);
 
         /** 削除詳細メッセージ用にタイトルを取得 */
         $NameStmt = $Pdo->prepare("SELECT title FROM TimelineInfo WHERE timeId = :timeId AND workId = :workId");

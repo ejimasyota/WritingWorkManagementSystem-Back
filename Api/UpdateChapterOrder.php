@@ -44,6 +44,22 @@ try {
     $LockStmt = $Pdo->prepare("SELECT pg_advisory_xact_lock(" . ChapterOrder::ADVISORY_LOCK_KEY . ", hashtext(:workId))");
     $LockStmt->execute([':workId' => (string) $WorkId]);
 
+    // 新フロントは全行の読み込み時の版を送る。件数だけでなくIDの重複と更新競合も確認する。
+    $VersionStmt = $Pdo->prepare('SELECT chapterId, updateDate FROM ChapterInfo WHERE workId = :workId ORDER BY chapterId FOR UPDATE');
+    $VersionStmt->execute([':workId' => $WorkId]);
+    $Versions = [];
+    foreach ($VersionStmt->fetchAll() as $Row) $Versions[(string) $Row['chapterid']] = (string) $Row['updatedate'];
+    $HasVersions = array_filter($OrderList, static fn($Row): bool => is_array($Row) && array_key_exists('UpdateDate', $Row));
+    $Seen = [];
+    foreach ($OrderList as $Row) {
+        $Id = is_array($Row) ? (string) ($Row['ChapterId'] ?? '') : '';
+        if ($Id === '' || isset($Seen[$Id]) || !isset($Versions[$Id])
+            || ($HasVersions && $Versions[$Id] !== (string) ($Row['UpdateDate'] ?? ''))) {
+            Database::Rollback(); Response::ConflictError();
+        }
+        $Seen[$Id] = true;
+    }
+
     // OrderList が対象作品の全チャプターを網羅しているか検証
     $CountStmt = $Pdo->prepare("SELECT COUNT(*) AS cnt FROM ChapterInfo WHERE workId = :workId");
     $CountStmt->execute([':workId' => $WorkId]);
@@ -88,7 +104,9 @@ try {
 
     $UpdateSql = "
         UPDATE ChapterInfo SET
-            indexNum = :indexNum
+            indexNum = :indexNum,
+            updateDate = CURRENT_TIMESTAMP(3),
+            updateUser = :updateUser
         WHERE chapterId = :chapterId AND workId = :workId
     ";
     $UpdateStmt = $Pdo->prepare($UpdateSql);
@@ -96,6 +114,7 @@ try {
         $UpdateStmt->execute([
             ':chapterId' => $Order['ChapterId'],
             ':workId' => $WorkId,
+            ':updateUser' => $UserId,
             ':indexNum' => (int) $Order['IndexNum']
         ]);
     }

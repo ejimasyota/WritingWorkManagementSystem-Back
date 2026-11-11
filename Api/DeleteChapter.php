@@ -51,6 +51,8 @@ function DeleteChapter(): void
         /** DB接続 */
         $Pdo = Database::GetConnection();
         Database::BeginTransaction();
+        // 年表・チャプター共通で、作品の並び順ロックを行ロックより先に取得する。
+        ChapterOrder::Lock($Pdo, (string) $WorkId);
 
         /** 削除詳細メッセージ用にチャプター名を取得 */
         $NameStmt = $Pdo->prepare("SELECT chapterName FROM ChapterInfo WHERE chapterId = :chapterId AND workId = :workId");

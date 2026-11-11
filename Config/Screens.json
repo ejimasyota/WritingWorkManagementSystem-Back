@@ -1,0 +1,350 @@
+{
+  "Screens": [
+    {
+      "MenuId": "MenuCharacter",
+      "ScreenName": "キャラ設定",
+      "Tables": [
+        {
+          "TableName": "characterinfo",
+          "RowIdColumn": "charaid",
+          "WorkIdColumn": "workid",
+          "SearchableColumns": [
+            { "Column": "charaname", "Label": "キャラ名" },
+            { "Column": "furigana", "Label": "ふりがな" },
+            { "Column": "nickname", "Label": "ニックネーム" },
+            { "Column": "causeofdeath", "Label": "死因" },
+            { "Column": "model", "Label": "モデル" },
+            { "Column": "appearanceremarks", "Label": "外見備考" },
+            { "Column": "roleinfo", "Label": "役柄" },
+            { "Column": "personality", "Label": "性格" },
+            { "Column": "biography", "Label": "経歴" },
+            { "Column": "purpose", "Label": "目的" },
+            { "Column": "belief", "Label": "信念" },
+            { "Column": "likes", "Label": "好きなもの", "EntryEntity": "Character", "EntryKey": "Likes" },
+            { "Column": "dislikes", "Label": "嫌いなもの", "EntryEntity": "Character", "EntryKey": "Dislikes" },
+            { "Column": "habit", "Label": "癖", "EntryEntity": "Character", "EntryKey": "Habit" },
+            { "Column": "verbaltic", "Label": "口癖" },
+            { "Column": "hobby", "Label": "趣味", "EntryEntity": "Character", "EntryKey": "Hobby" },
+            { "Column": "note", "Label": "備考" }
+          ]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuOrganization",
+      "ScreenName": "組織設定",
+      "Tables": [
+        {
+          "TableName": "organizationinfo",
+          "RowIdColumn": "orgid",
+          "WorkIdColumn": "workid",
+          "SearchableColumns": [
+            { "Column": "orgname", "Label": "組織名" },
+            { "Column": "purpose", "Label": "目的" },
+            { "Column": "activity", "Label": "活動内容" },
+            { "Column": "note", "Label": "備考" }
+          ]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuTeam",
+      "ScreenName": "チーム設定",
+      "Tables": [
+        {
+          "TableName": "teaminfo",
+          "RowIdColumn": "teamid",
+          "WorkIdColumn": "workid",
+          "SearchableColumns": [
+            { "Column": "teamname", "Label": "チーム名" },
+            { "Column": "description", "Label": "説明" }
+          ]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuRace",
+      "ScreenName": "種族設定",
+      "Tables": [
+        {
+          "TableName": "raceinfo",
+          "RowIdColumn": "raceid",
+          "WorkIdColumn": "workid",
+          "SearchableColumns": [
+            { "Column": "racename", "Label": "種族名" },
+            { "Column": "description", "Label": "説明" }
+          ]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuClass",
+      "ScreenName": "階級設定",
+      "Tables": [
+        {
+          "TableName": "classinfo",
+          "RowIdColumn": "classid",
+          "WorkIdColumn": "workid",
+          "SearchableColumns": [
+            { "Column": "classname", "Label": "階級名" },
+            { "Column": "description", "Label": "説明" }
+          ]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuBiography",
+      "ScreenName": "経歴一覧",
+      "Tables": [
+        {
+          "TableName": "biographyinfo",
+          "RowIdColumn": "biographyid",
+          "WorkIdColumn": "workid",
+          "SearchableColumns": [{ "Column": "content", "Label": "内容" }]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuCalendar",
+      "ScreenName": "元号設定",
+      "Tables": [
+        {
+          "TableName": "calendarinfo",
+          "RowIdColumn": "caleid",
+          "WorkIdColumn": "workid",
+          "SearchableColumns": [
+            { "Column": "eraname", "Label": "元号名" },
+            { "Column": "description", "Label": "説明" }
+          ]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuTimeline",
+      "ScreenName": "年表設定",
+      "Tables": [
+        {
+          "TableName": "timelineinfo",
+          "RowIdColumn": "timeid",
+          "WorkIdColumn": "workid",
+          "SearchableColumns": [
+            { "Column": "title", "Label": "タイトル" },
+            { "Column": "content", "Label": "内容" }
+          ]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuChapter",
+      "ScreenName": "チャプター設定",
+      "Tables": [
+        {
+          "TableName": "chapterinfo",
+          "RowIdColumn": "chapterid",
+          "WorkIdColumn": "workid",
+          "SearchableColumns": [
+            { "Column": "chaptername", "Label": "チャプター名" },
+            { "Column": "description", "Label": "概要" }
+          ]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuStage",
+      "ScreenName": "舞台設定",
+      "Tables": [
+        {
+          "TableName": "stageinfo",
+          "RowIdColumn": "stageid",
+          "WorkIdColumn": "workid",
+          "SearchableColumns": [
+            { "Column": "stagename", "Label": "舞台名" },
+            { "Column": "description", "Label": "説明" }
+          ]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuBuilding",
+      "ScreenName": "建物設定",
+      "Tables": [
+        {
+          "TableName": "buildinfo",
+          "RowIdColumn": "buildid",
+          "WorkIdColumn": "workid",
+          "SearchableColumns": [
+            { "Column": "buildname", "Label": "建物名" },
+            { "Column": "description", "Label": "説明" }
+          ]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuPower",
+      "ScreenName": "能力設定",
+      "Tables": [
+        {
+          "TableName": "powerinfo",
+          "RowIdColumn": "powerid",
+          "WorkIdColumn": "workid",
+          "SearchableColumns": [
+            { "Column": "powername", "Label": "能力名" },
+            { "Column": "description", "Label": "説明" },
+            { "Column": "conditions", "Label": "発動条件", "EntryEntity": "Power", "EntryKey": "Conditions" },
+            { "Column": "risk", "Label": "リスク", "EntryEntity": "Power", "EntryKey": "Risk" }
+          ]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuWeapon",
+      "ScreenName": "武器設定",
+      "Tables": [
+        {
+          "TableName": "weaponinfo",
+          "RowIdColumn": "weaponid",
+          "WorkIdColumn": "workid",
+          "SearchableColumns": [
+            { "Column": "weaponname", "Label": "武器名" },
+            { "Column": "description", "Label": "説明" }
+          ]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuItem",
+      "ScreenName": "アイテム設定",
+      "Tables": [
+        {
+          "TableName": "iteminfo",
+          "RowIdColumn": "itemid",
+          "WorkIdColumn": "workid",
+          "SearchableColumns": [
+            { "Column": "itemname", "Label": "アイテム名" },
+            { "Column": "description", "Label": "説明" }
+          ]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuMove",
+      "ScreenName": "技設定",
+      "Tables": [
+        {
+          "TableName": "moveinfo",
+          "RowIdColumn": "moveid",
+          "WorkIdColumn": "workid",
+          "SearchableColumns": [
+            { "Column": "movename", "Label": "技名" },
+            { "Column": "description", "Label": "説明" }
+          ]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuTag",
+      "ScreenName": "タグマスタ",
+      "Tables": [
+        {
+          "TableName": "taginfo",
+          "RowIdColumn": "tagid",
+          "WorkIdColumn": "workid",
+          "SearchableColumns": [
+            { "Column": "tagname", "Label": "タグ名" },
+            { "Column": "description", "Label": "説明" }
+          ]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuSerif",
+      "ScreenName": "セリフ設定",
+      "Tables": [
+        {
+          "TableName": "serifinfo",
+          "RowIdColumn": "serifid",
+          "WorkIdColumn": "workid",
+          "SearchableColumns": [
+            { "Column": "content", "Label": "内容" },
+            { "Column": "situation", "Label": "状況" }
+          ]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuStory",
+      "ScreenName": "ストーリー行作成",
+      "Tables": [
+        {
+          "TableName": "storyrows",
+          "RowIdColumn": "storyrowid",
+          "ParentTable": "storyinfo",
+          "ParentJoinColumn": "storyid",
+          "SearchableColumns": [
+            { "Column": "narrator", "Label": "語り手" },
+            { "Column": "content", "Label": "内容" }
+          ]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuPlot",
+      "ScreenName": "プロット行作成",
+      "Tables": [
+        {
+          "TableName": "plotrows",
+          "RowIdColumn": "plotrowid",
+          "ParentTable": "plotinfo",
+          "ParentJoinColumn": "plotid",
+          "SearchableColumns": [{ "Column": "content", "Label": "内容" }]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuClue",
+      "ScreenName": "伏線メモ",
+      "Tables": [
+        {
+          "TableName": "clueinfo",
+          "RowIdColumn": "clueid",
+          "WorkIdColumn": "workid",
+          "SearchableColumns": [
+            { "Column": "title", "Label": "タイトル" },
+            { "Column": "content", "Label": "内容" },
+            { "Column": "recoverystatus", "Label": "回収状況" }
+          ]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuTerm",
+      "ScreenName": "作中用語",
+      "Tables": [
+        {
+          "TableName": "terminfo",
+          "RowIdColumn": "termid",
+          "WorkIdColumn": "workid",
+          "SearchableColumns": [
+            { "Column": "termname", "Label": "用語名" },
+            { "Column": "description", "Label": "説明" }
+          ]
+        }
+      ]
+    },
+    {
+      "MenuId": "MenuMemo",
+      "ScreenName": "作品作成用メモ",
+      "Tables": [
+        {
+          "TableName": "workmemoinfo",
+          "RowIdColumn": "memoid",
+          "WorkIdColumn": "workid",
+          "SearchableColumns": [
+            { "Column": "title", "Label": "タイトル" },
+            { "Column": "content", "Label": "内容" }
+          ]
+        }
+      ]
+    }
+  ]
+}

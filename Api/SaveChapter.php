@@ -91,6 +91,8 @@ function SaveChapter(): void
         /** DB接続 */
         $Pdo = Database::GetConnection();
         Database::BeginTransaction();
+        // 年表・チャプター共通で、作品の並び順ロックを行ロックより先に取得する。
+        ChapterOrder::Lock($Pdo, (string) $WorkId);
 
         /*
          * 関連年表・関連キャラの検証

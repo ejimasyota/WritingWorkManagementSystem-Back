@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /* ==========================================================
  * 作品資料Word出力
  * ----------------------------------------------------------
@@ -18,6 +18,7 @@
  * ========================================================== */
 // 1. データベース接続クラス
 require_once __DIR__ . '/../Common/Database.php';
+require_once __DIR__ . '/../Common/HtmlDocument.php';
 // 2. ログ出力クラス
 require_once __DIR__ . '/../Common/Logger.php';
 // 3. レスポンスクラス
@@ -2283,7 +2284,7 @@ function ExportHtml(
      * 1. 事前処理
      * ------------------------------*/
     // 1. HTMLエスケープ
-    $Escape = static fn($Value): string => htmlspecialchars((string)($Value ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    $Escape = [HtmlDocument::class, 'Escape'];
     // 2. 出力値の整形
     $Value = static function ($Value) use ($Escape, $NewLine): string {
         // Word出力と同じく、表形式項目は行ごとに、空の値は「未設定」として出力する
@@ -2620,11 +2621,7 @@ function ExportHtml(
      * 3. 戻り値返却
      * ------------------------------*/
     // 1. HTMLをBase64エンコードし、呼び出し元に返却
-    return [
-        'FileData' => base64_encode($Html),
-        'FileName' => $WorkTitle . '_資料.html',
-        'MimeType' => 'text/html; charset=UTF-8'
-    ];
+    return HtmlDocument::File($Html, $WorkTitle . '_資料');
 }
 
 /* ==========================================================

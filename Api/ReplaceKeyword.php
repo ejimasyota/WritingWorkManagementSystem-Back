@@ -29,6 +29,7 @@ require_once __DIR__ . '/../Common/Database.php';
 require_once __DIR__ . '/../Common/Logger.php';
 require_once __DIR__ . '/../Common/Response.php';
 require_once __DIR__ . '/../Common/Auth.php';
+require_once __DIR__ . '/../Common/SearchScreens.php';
 
 // POSTメソッドのみ許可
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -77,24 +78,9 @@ try {
         Response::Error('置換を実行する権限がありません', 403);
     }
 
-    // 画面定義の読込
-    $ConfigPath = __DIR__ . '/../../Front/Config/Screens.json';
-    if (!is_file($ConfigPath)) {
-        Logger::Error($FunctionName, '画面定義ファイルが見つかりません', $UserId, $ConfigPath);
-        Response::Error('画面定義ファイルが見つかりません');
-    }
-    $ConfigJson = file_get_contents($ConfigPath);
-    $Config = json_decode($ConfigJson, true);
-    if (!is_array($Config) || empty($Config['Screens'])) {
-        Logger::Error($FunctionName, '画面定義ファイルの形式が不正です', $UserId, '');
-        Response::Error('画面定義の読込に失敗しました');
-    }
-
-    // 指定された MenuIds に該当する画面定義のみ抽出
-    $RequestedMenuIds = array_map('strval', $MenuIds);
-    $TargetScreens = array_values(array_filter($Config['Screens'], function ($Screen) use ($RequestedMenuIds) {
-        return isset($Screen['MenuId']) && in_array((string)$Screen['MenuId'], $RequestedMenuIds, true);
-    }));
+    // 検索・置換で共有する、バックエンド内の許可定義を使用する。
+    $Config = SearchScreens::Load();
+    $TargetScreens = SearchScreens::Select($Config['Screens'], $MenuIds);
     if (empty($TargetScreens)) {
         Response::Error('指定された画面が画面定義に存在しません');
     }
@@ -145,16 +131,16 @@ try {
                 : [];
 
             // 識別子検証
-            if (!IsValidIdentifier($TableName) || !IsValidIdentifier($RowIdColumn)) {
+            if (!SearchScreens::IsValidIdentifier($TableName) || !SearchScreens::IsValidIdentifier($RowIdColumn)) {
                 continue;
             }
-            if ($WorkIdColumn !== '' && !IsValidIdentifier($WorkIdColumn)) {
+            if ($WorkIdColumn !== '' && !SearchScreens::IsValidIdentifier($WorkIdColumn)) {
                 continue;
             }
-            if ($ParentTable !== '' && !IsValidIdentifier($ParentTable)) {
+            if ($ParentTable !== '' && !SearchScreens::IsValidIdentifier($ParentTable)) {
                 continue;
             }
-            if ($ParentJoinColumn !== '' && !IsValidIdentifier($ParentJoinColumn)) {
+            if ($ParentJoinColumn !== '' && !SearchScreens::IsValidIdentifier($ParentJoinColumn)) {
                 continue;
             }
             if (empty($SearchableColumns)) {
@@ -166,7 +152,7 @@ try {
             $ValidColumns = [];
             foreach ($SearchableColumns as $Col) {
                 $ColName = isset($Col['Column']) ? (string)$Col['Column'] : '';
-                if (!IsValidIdentifier($ColName)) {
+                if (!SearchScreens::IsValidIdentifier($ColName)) {
                     continue;
                 }
                 $ValidColumns[] = $ColName;
@@ -184,9 +170,9 @@ try {
 
             // 親テーブル経由 or WorkIdColumn 直接
             if ($ParentTable !== '' && $ParentJoinColumn !== '') {
-                $ParentScreenDef = FindParentTableDef($Config['Screens'], $ParentTable);
+                $ParentScreenDef = SearchScreens::FindParentTableDef($Config['Screens'], $ParentTable);
                 $ParentWorkIdColumn = $ParentScreenDef['WorkIdColumn'] ?? 'workid';
-                if (!IsValidIdentifier($ParentWorkIdColumn)) {
+                if (!SearchScreens::IsValidIdentifier($ParentWorkIdColumn)) {
                     $ParentWorkIdColumn = 'workid';
                 }
                 $SelectCols[] = "t.$ParentJoinColumn AS parentid";
@@ -321,31 +307,3 @@ try {
     Response::Error('キーワード置換に失敗しました');
 }
 
-/**
- * SQL 識別子として安全な文字列か判定
- */
-function IsValidIdentifier($Name)
-{
-    if (!is_string($Name) || $Name === '') {
-        return false;
-    }
-    return preg_match('/^[A-Za-z_][A-Za-z0-9_]*$/', $Name) === 1;
-}
-
-/**
- * 画面定義配列から指定テーブルの定義を検索し、最初に見つかったものを返す。
- */
-function FindParentTableDef($Screens, $TableName)
-{
-    foreach ($Screens as $Screen) {
-        if (!isset($Screen['Tables']) || !is_array($Screen['Tables'])) {
-            continue;
-        }
-        foreach ($Screen['Tables'] as $Table) {
-            if (isset($Table['TableName']) && (string)$Table['TableName'] === $TableName) {
-                return $Table;
-            }
-        }
-    }
-    return null;
-}

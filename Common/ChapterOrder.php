@@ -31,6 +31,13 @@ class ChapterOrder
     /** アドバイザリロックのキー（第1引数：機能識別子） */
     const ADVISORY_LOCK_KEY = 1002;
 
+    /** 年表・チャプターの行を更新する前に、作品単位の順序ロックを取得する。 */
+    public static function Lock(PDO $Pdo, string $WorkId): void
+    {
+        $Stmt = $Pdo->prepare("SELECT pg_advisory_xact_lock(" . self::ADVISORY_LOCK_KEY . ", hashtext(:workId))");
+        $Stmt->execute([':workId' => $WorkId]);
+    }
+
     /**
      * 指定作品のチャプターの並び順を正規化する
      *
@@ -47,8 +54,7 @@ class ChapterOrder
         }
 
         /** 並び順の同時更新による競合を防ぐため、作品単位でアドバイザリロックを取得 */
-        $LockStmt = $Pdo->prepare("SELECT pg_advisory_xact_lock(" . self::ADVISORY_LOCK_KEY . ", hashtext(:workId))");
-        $LockStmt->execute([':workId' => $WorkId]);
+        self::Lock($Pdo, $WorkId);
 
         /** 現在の並び順でチャプターを取得（年表の発生時期も併せて取得） */
         $Stmt = $Pdo->prepare("

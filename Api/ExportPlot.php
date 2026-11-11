@@ -1,6 +1,7 @@
-﻿<?php
+<?php
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../Common/Database.php';
+require_once __DIR__ . '/../Common/HtmlDocument.php';
 require_once __DIR__ . '/../Common/Logger.php';
 require_once __DIR__ . '/../Common/Response.php';
 require_once __DIR__ . '/../Common/Auth.php';
@@ -8,7 +9,8 @@ require_once __DIR__ . '/../Common/Auth.php';
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\IOFactory;
 
-$FunctionName = 'プロットWord出力';
+$FunctionName = 'プロット出力';
+$FormatLabel = 'Word';
 $UserId = '';
 
 try {
@@ -24,8 +26,13 @@ try {
     $Font = $Input['Font'] ?? 'ＭＳ ゴシック';
     $NewLine = $Input['NewLine'] ?? false;
     $Cover = $Input['Cover'] ?? true;
+    $ExportType = $Input['ExportType'] ?? 'word';
+    if (!in_array($ExportType, ['word', 'html'], true)) {
+        Response::Error('出力形式が不正です');
+    }
 
-    Logger::Info($FunctionName, 'Word出力処理開始', $UserId);
+    $FormatLabel = $ExportType === 'html' ? 'HTML' : 'Word';
+    Logger::Info($FunctionName, $FormatLabel . '出力処理開始', $UserId);
 
     if (empty($WorkId)) {
         Response::Error('作品IDが指定されていません');
@@ -58,6 +65,17 @@ try {
     $Plots = $PlotStmt->fetchAll();
 
     $StructureLabels = ['起', '承', '転', '結'];
+
+    if ($ExportType === 'html') {
+        $Rows = array_map(static function (array $Row) use ($StructureLabels): array {
+            $Label = $StructureLabels[($Row['structuretype'] ?? 0) - 1] ?? '';
+            return ['Heading' => $Row['indexnum'] . '. ' . ($Label !== '' ? '[' . $Label . '] ' : ''),
+                'Content' => $Row['content'] ?? ''];
+        }, $Plots);
+        Logger::Info($FunctionName, 'HTML出力処理終了', $UserId);
+        Response::Success(HtmlDocument::Narrative($WorkTitle, $PlotName, 'プロット', $Rows,
+            (string) $Font, (bool) $NewLine, (bool) $Cover));
+    }
 
     /* 出力する文字列のXMLエスケープを有効にする
      * 既定は無効のため、利用者が登録した名称・本文等に WordprocessingML のタグが含まれると、
@@ -126,6 +144,6 @@ try {
     ]);
 
 } catch (Exception $E) {
-    Logger::Error($FunctionName, 'Word出力処理エラー', $UserId, $E->getMessage());
-    Response::Error('Word出力に失敗しました');
+    Logger::Error($FunctionName, $FormatLabel . '出力処理エラー', $UserId, $E->getMessage());
+    Response::Error($FormatLabel . '出力に失敗しました');
 }

@@ -8,7 +8,7 @@
  *   - Keyword: 検索キーワード (必須、空白不可)
  *   - MenuIds: 検索対象画面IDの配列 (必須、1件以上)
  *
- * 検索対象列の定義は Front/Config/Screens.json を参照。
+ * 検索対象列の定義は Back/Config/Screens.json を参照。
  * 列名・テーブル名は Screens.json で許可されたもの以外は採用しないため
  * SQLインジェクション耐性を保つ。
  */
@@ -17,6 +17,7 @@ require_once __DIR__ . '/../Common/Database.php';
 require_once __DIR__ . '/../Common/Logger.php';
 require_once __DIR__ . '/../Common/Response.php';
 require_once __DIR__ . '/../Common/Auth.php';
+require_once __DIR__ . '/../Common/SearchScreens.php';
 require_once __DIR__ . '/../Common/EntryTable.php';
 
 // POSTメソッドのみ許可
@@ -46,24 +47,9 @@ try {
         Response::Error('検索対象画面を1つ以上選択してください');
     }
 
-    // 画面定義の読込
-    $ConfigPath = __DIR__ . '/../../Front/Config/Screens.json';
-    if (!is_file($ConfigPath)) {
-        Logger::Error($FunctionName, '画面定義ファイルが見つかりません', $UserId, $ConfigPath);
-        Response::Error('画面定義ファイルが見つかりません');
-    }
-    $ConfigJson = file_get_contents($ConfigPath);
-    $Config = json_decode($ConfigJson, true);
-    if (!is_array($Config) || empty($Config['Screens'])) {
-        Logger::Error($FunctionName, '画面定義ファイルの形式が不正です', $UserId, '');
-        Response::Error('画面定義の読込に失敗しました');
-    }
-
-    // 指定された MenuIds に該当する画面定義のみ抽出
-    $RequestedMenuIds = array_map('strval', $MenuIds);
-    $TargetScreens = array_values(array_filter($Config['Screens'], function ($Screen) use ($RequestedMenuIds) {
-        return isset($Screen['MenuId']) && in_array((string)$Screen['MenuId'], $RequestedMenuIds, true);
-    }));
+    // 検索・置換で共有する、バックエンド内の許可定義を使用する。
+    $Config = SearchScreens::Load();
+    $TargetScreens = SearchScreens::Select($Config['Screens'], $MenuIds);
     if (empty($TargetScreens)) {
         Response::Error('指定された画面が画面定義に存在しません');
     }
@@ -93,16 +79,16 @@ try {
                 : [];
 
             // テーブル名・列名は識別子のためホワイトリスト的に検証
-            if (!IsValidIdentifier($TableName) || !IsValidIdentifier($RowIdColumn)) {
+            if (!SearchScreens::IsValidIdentifier($TableName) || !SearchScreens::IsValidIdentifier($RowIdColumn)) {
                 continue;
             }
-            if ($WorkIdColumn !== '' && !IsValidIdentifier($WorkIdColumn)) {
+            if ($WorkIdColumn !== '' && !SearchScreens::IsValidIdentifier($WorkIdColumn)) {
                 continue;
             }
-            if ($ParentTable !== '' && !IsValidIdentifier($ParentTable)) {
+            if ($ParentTable !== '' && !SearchScreens::IsValidIdentifier($ParentTable)) {
                 continue;
             }
-            if ($ParentJoinColumn !== '' && !IsValidIdentifier($ParentJoinColumn)) {
+            if ($ParentJoinColumn !== '' && !SearchScreens::IsValidIdentifier($ParentJoinColumn)) {
                 continue;
             }
             if (empty($SearchableColumns)) {
@@ -115,7 +101,7 @@ try {
             foreach ($SearchableColumns as $Col) {
                 $ColName = isset($Col['Column']) ? (string)$Col['Column'] : '';
                 $ColLabel = isset($Col['Label']) ? (string)$Col['Label'] : $ColName;
-                if (!IsValidIdentifier($ColName)) {
+                if (!SearchScreens::IsValidIdentifier($ColName)) {
                     continue;
                 }
                 // 表形式項目（JSON保持）の列は EntryTable の定義名を保持する
@@ -143,9 +129,9 @@ try {
 
             // 親テーブル経由の WorkId フィルタ
             if ($ParentTable !== '' && $ParentJoinColumn !== '') {
-                $ParentScreenDef = FindParentTableDef($Config['Screens'], $ParentTable);
+                $ParentScreenDef = SearchScreens::FindParentTableDef($Config['Screens'], $ParentTable);
                 $ParentWorkIdColumn = $ParentScreenDef['WorkIdColumn'] ?? 'workid';
-                if (!IsValidIdentifier($ParentWorkIdColumn)) {
+                if (!SearchScreens::IsValidIdentifier($ParentWorkIdColumn)) {
                     $ParentWorkIdColumn = 'workid';
                 }
                 $SelectCols[] = "t.$ParentJoinColumn AS parentid";
@@ -218,32 +204,3 @@ try {
     Response::Error('キーワード検索に失敗しました');
 }
 
-/**
- * SQL 識別子（テーブル名・列名）として安全な文字列か判定
- * 英数字とアンダースコアのみ、先頭は英字またはアンダースコア。
- */
-function IsValidIdentifier($Name)
-{
-    if (!is_string($Name) || $Name === '') {
-        return false;
-    }
-    return preg_match('/^[A-Za-z_][A-Za-z0-9_]*$/', $Name) === 1;
-}
-
-/**
- * 画面定義配列から指定テーブルの定義を検索し、最初に見つかったものを返す。
- */
-function FindParentTableDef($Screens, $TableName)
-{
-    foreach ($Screens as $Screen) {
-        if (!isset($Screen['Tables']) || !is_array($Screen['Tables'])) {
-            continue;
-        }
-        foreach ($Screen['Tables'] as $Table) {
-            if (isset($Table['TableName']) && (string)$Table['TableName'] === $TableName) {
-                return $Table;
-            }
-        }
-    }
-    return null;
-}
