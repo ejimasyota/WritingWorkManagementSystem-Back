@@ -83,6 +83,7 @@ try {
             c.bloodType AS \"BloodType\",
             c.raceId AS \"RaceId\",
             c.raceName AS \"RaceName\",
+            c.affiliations AS \"Affiliations\",
             c.orgId AS \"OrgId\",
             c.orgName AS \"OrgName\",
             c.teamId AS \"TeamId\",

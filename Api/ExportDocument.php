@@ -18,6 +18,7 @@
  * ========================================================== */
 // 1. データベース接続クラス
 require_once __DIR__ . '/../Common/Database.php';
+require_once __DIR__ . '/../Common/CharacterAffiliation.php';
 require_once __DIR__ . '/../Common/HtmlDocument.php';
 require_once __DIR__ . '/../Common/NarrativeText.php';
 // 2. ログ出力クラス
@@ -624,6 +625,7 @@ function GetCharaInfo(PDO $Pdo, string $WorkId, string $OrderDirection): array {
             c.moves AS \"Moves\",
             c.teamName AS \"TeamName\",
             c.className AS \"ClassName\",
+            c.affiliations AS \"Affiliations\",
             c.orgName AS \"OrgName\",
             c.roleInfo AS \"RoleInfo\",
             c.personality AS \"Personality\",
@@ -1740,9 +1742,7 @@ function ExportWordDocument(
                     ['能力', FormatSkillNames('Powers', 'PowerId', $Chara['Powers'], $PowerNameById)],
                     ['武器', FormatSkillNames('Weapons', 'WeaponId', $Chara['Weapons'], $WeaponNameById)],
                     ['技', FormatSkillNames('Moves', 'MoveId', $Chara['Moves'], $MoveNameById)],
-                    ['属するチーム', $Chara['TeamName']],
-                    ['階級', $Chara['ClassName']],
-                    ['属する組織', $Chara['OrgName']],
+                    ['所属履歴', CharacterAffiliation::FormatLines($Chara['Affiliations'] ?? null)],
                     ['好き', EntryTable::FormatLines('Character', 'Likes', $Chara['Likes'])],
                     ['嫌い', EntryTable::FormatLines('Character', 'Dislikes', $Chara['Dislikes'])],
                     ['地雷', EntryTable::FormatLines('Character', 'Landmine', $Chara['Landmine'])],
@@ -2520,7 +2520,7 @@ function ExportHtml(
             ['能力', FormatSkillNames('Powers', 'PowerId', $C['Powers'], $PowerNames)],
             ['武器', FormatSkillNames('Weapons', 'WeaponId', $C['Weapons'], $WeaponNames)],
             ['技', FormatSkillNames('Moves', 'MoveId', $C['Moves'], $MoveNames)],
-            ['属するチーム', $C['TeamName']], ['階級', $C['ClassName']], ['属する組織', $C['OrgName']],
+            ['所属履歴', CharacterAffiliation::FormatLines($C['Affiliations'] ?? null)],
             ['好き', EntryTable::FormatLines('Character', 'Likes', $C['Likes'])],
             ['嫌い', EntryTable::FormatLines('Character', 'Dislikes', $C['Dislikes'])],
             ['地雷', EntryTable::FormatLines('Character', 'Landmine', $C['Landmine'])],

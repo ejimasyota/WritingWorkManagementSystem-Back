@@ -16,6 +16,7 @@
  * ========================================================== */
 // 1. データベース接続クラス
 require_once __DIR__ . '/../Common/Database.php';
+require_once __DIR__ . '/../Common/CharacterAffiliation.php';
 // 2. ログ出力クラス
 require_once __DIR__ . '/../Common/Logger.php';
 // 3. レスポンスクラス
@@ -387,6 +388,30 @@ try {
     $AppearanceRemarks = !empty($AppearanceRemarks) ? $AppearanceRemarks : null;
     $MoveIds      = ParseCharaSkillIds('Moves', 'MoveId', $Moves);
 
+    // 所属履歴と最新所属は、このキャラ保存のトランザクション内でまとめて更新する。
+    $PreviousAffiliations = null;
+    if ($CharaId !== null) {
+        $AffiliationStmt = $Pdo->prepare('SELECT affiliations FROM CharacterInfo WHERE charaId = :charaId AND workId = :workId FOR UPDATE');
+        $AffiliationStmt->execute([':charaId' => $CharaId, ':workId' => $WorkId]);
+        $PreviousAffiliations = $AffiliationStmt->fetchColumn() ?: null;
+    }
+    $AffiliationInput = $Input['Affiliations'] ?? $PreviousAffiliations;
+    // 旧形式の呼び出しも履歴を失わずに取り込む。
+    if ($AffiliationInput === null && ($OrgId !== null || $TeamId !== null || $ClassId !== null)) {
+        $AffiliationInput = ['Affiliations' => [['OrgId' => $OrgId, 'TeamId' => $TeamId, 'ClassId' => $ClassId]]];
+    }
+    try {
+        $AffiliationRows = CharacterAffiliation::Prepare($Pdo, $WorkId, $AffiliationInput, $PreviousAffiliations);
+    } catch (InvalidArgumentException $Error) {
+        Database::Rollback();
+        Response::Error($Error->getMessage());
+    }
+    $Affiliations = CharacterAffiliation::Encode($AffiliationRows);
+    $LatestAffiliation = $AffiliationRows[0] ?? [];
+    $OrgId = ($LatestAffiliation['OrgId'] ?? '') ?: null;
+    $TeamId = ($LatestAffiliation['TeamId'] ?? '') ?: null;
+    $ClassId = ($LatestAffiliation['ClassId'] ?? '') ?: null;
+
    /* ---------------------------------------------
      * 7-1. 関連ID（種族・所属組織・所属チーム・階級・出身地）の検証
      *  ・ いずれも同一作品内に存在するIDであることを要求する。
@@ -394,9 +419,6 @@ try {
     // 1. 検証対象（項目名 => [テーブル名, ID列名, 値]）
     $RelationChecks = [
         '種族'     => ['RaceInfo',         'raceId',  $RaceId],
-        '所属組織' => ['OrganizationInfo', 'orgId',   $OrgId],
-        '所属チーム' => ['TeamInfo',       'teamId',  $TeamId],
-        '階級'     => ['ClassInfo',        'classId', $ClassId],
         '出身地'   => ['StageInfo',        'stageId', $BirthplaceId],
     ];
     // 2. 未選択（NULL）以外を検証する
@@ -524,7 +546,7 @@ try {
         $Sql = "
             INSERT INTO CharacterInfo (
                 workId, charaName, gender, birthDate, age, height, weight, bloodType,
-                raceId, orgId, teamId, classId, powers, weapons, roleInfo, personality, biography,
+                raceId, orgId, teamId, classId, affiliations, powers, weapons, roleInfo, personality, biography,
                 belief, likes, dislikes, firstPerson, secondPerson, imgPath, imgList, purpose, note,
                 deathDate, habit, verbalTic, hobby, causeOfDeath, furigana, nickname,
                 hairColor, eyeColor, skinColor, model, appearanceRemarks,
@@ -534,7 +556,7 @@ try {
                 registDate, updateDate, registUser, updateUser
             ) VALUES (
                 :workId, :charaName, :gender, :birthDate, :age, :height, :weight, :bloodType,
-                :raceId, :orgId, :teamId, :classId, :powers, :weapons, :roleInfo, :personality, :biography,
+                :raceId, :orgId, :teamId, :classId, :affiliations, :powers, :weapons, :roleInfo, :personality, :biography,
                 :belief, :likes, :dislikes, :firstPerson, :secondPerson, :imgPath, :imgList, :purpose, :note,
                 :deathDate, :habit, :verbalTic, :hobby, :causeOfDeath, :furigana, :nickname,
                 :hairColor, :eyeColor, :skinColor, :model, :appearanceRemarks,
@@ -566,6 +588,7 @@ try {
         // 11. 種族ID設定
         $Stmt->bindValue(':raceId',       $RaceId,       $RaceId === null ? PDO::PARAM_NULL : PDO::PARAM_STR);
         // 12. 組織ID設定
+        $Stmt->bindValue(':affiliations', $Affiliations, PDO::PARAM_STR);
         $Stmt->bindValue(':orgId',        $OrgId,        $OrgId === null ? PDO::PARAM_NULL : PDO::PARAM_STR);
         // 13. チームID設定
         $Stmt->bindValue(':teamId',       $TeamId,       $TeamId === null ? PDO::PARAM_NULL : PDO::PARAM_STR);
@@ -676,7 +699,7 @@ try {
                 c.note, c.habit, c.verbalTic, c.hobby, c.hairColor, c.eyeColor, c.skinColor,
                 c.model, c.appearanceRemarks, c.transition, c.pendingSetting,
                 c.raceId, c.raceName, c.orgId, c.orgName, c.teamId, c.teamName,
-                c.classId, c.className, c.powers, c.weapons,
+                c.classId, c.className, c.affiliations, c.powers, c.weapons,
                 c.moves, c.birthplaceId, c.birthplaceName
             FROM v_character_detail c
             WHERE c.charaId = :charaId AND c.workId = :workId
@@ -722,6 +745,7 @@ try {
                 orgId = :orgId,
                 teamId = :teamId,
                 classId = :classId,
+                affiliations = :affiliations,
                 powers = :powers,
                 weapons = :weapons,
                 roleInfo = :roleInfo,
@@ -786,6 +810,7 @@ try {
         // 13.種族ID設定
         $Stmt->bindValue(':raceId',       $RaceId,       $RaceId === null ? PDO::PARAM_NULL : PDO::PARAM_STR);
         // 14.組織ID設定
+        $Stmt->bindValue(':affiliations', $Affiliations, PDO::PARAM_STR);
         $Stmt->bindValue(':orgId',        $OrgId,        $OrgId === null ? PDO::PARAM_NULL : PDO::PARAM_STR);
         // 15.チームID設定
         $Stmt->bindValue(':teamId',       $TeamId,       $TeamId === null ? PDO::PARAM_NULL : PDO::PARAM_STR);
@@ -945,6 +970,7 @@ try {
             'orgId'            => '組織',
             'teamId'           => 'チーム',
             'classId'          => '階級',
+            'affiliations'     => '所属履歴',
             'powers'           => '能力',
             'weapons'          => '武器',
             'moves'            => '技',
@@ -992,6 +1018,7 @@ try {
             'orgId'        => $OldRow['orgname']      ?? null,
             'teamId'       => $OldRow['teamname']     ?? null,
             'classId'      => $OldRow['classname']    ?? null,
+            'affiliations' => CharacterAffiliation::FormatLines($OldRow['affiliations'] ?? null),
             'powers'       => FormatCharaSkillForHistory($OldPowerIds,  $PowerHistoryNameMap),
             'weapons'      => FormatCharaSkillForHistory($OldWeaponIds, $WeaponHistoryNameMap),
             'moves'        => FormatCharaSkillForHistory($OldMoveIds,   $MoveHistoryNameMap),
@@ -1040,6 +1067,7 @@ try {
             'orgId'    => $NewFkName('OrganizationInfo', 'orgId',    'orgName',    $OrgId,    $OldRow['orgid']    ?? null, $OldRow['orgname']    ?? null),
             'teamId'   => $NewFkName('TeamInfo',         'teamId',   'teamName',   $TeamId,   $OldRow['teamid']   ?? null, $OldRow['teamname']   ?? null),
             'classId'  => $NewFkName('ClassInfo',        'classId',  'className',  $ClassId,  $OldRow['classid']  ?? null, $OldRow['classname']  ?? null),
+            'affiliations' => CharacterAffiliation::FormatLines($Affiliations),
             'powers'   => FormatCharaSkillForHistory($PowerIds,  $PowerHistoryNameMap),
             'weapons'  => FormatCharaSkillForHistory($WeaponIds, $WeaponHistoryNameMap),
             'moves'    => FormatCharaSkillForHistory($MoveIds,   $MoveHistoryNameMap),
