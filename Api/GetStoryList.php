@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * GetStoryList.php
  * ストーリー一覧取得API
@@ -122,6 +122,7 @@ try {
                 c.charaName AS \"NarratorCharaName\",
                 COALESCE(c.charaName, sr.narrator) AS \"NarratorDisplay\",
                 sr.monologue AS \"Monologue\",
+                sr.actionLine AS \"ActionLine\",
                 sr.content AS \"Content\",
                 sr.registDate AS \"RegistDate\",
                 sr.updateDate AS \"UpdateDate\",
@@ -146,6 +147,7 @@ try {
         'PlotList' => $PlotList,
         /* 作品のジャンルに対応するテンプレートが無い場合、
          * ストーリー作成ダイアログの「テンプレートから作成」は表示しない */
+        'TemplateRows' => TemplateMaster::ParseRows(TemplateMaster::GetTemplateText($Pdo, $WorkId, TemplateMaster::DIVISION_STORY)),
         'HasTemplate' => TemplateMaster::Exists($Pdo, $WorkId, TemplateMaster::DIVISION_STORY),
         'TotalCount' => count($StoryList)
     ]);

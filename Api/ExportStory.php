@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../Common/Database.php';
+require_once __DIR__ . '/../Common/NarrativeText.php';
 require_once __DIR__ . '/../Common/HtmlDocument.php';
 require_once __DIR__ . '/../Common/Logger.php';
 require_once __DIR__ . '/../Common/Response.php';
@@ -19,7 +20,7 @@ try {
         return;
     }
     $Input = Response::GetJsonInput();
-    $WorkId = $AuthWorkId ?? '';
+    $WorkId = (string)($Input['WorkId'] ?? $AuthWorkId ?? '');
     $StoryId = $Input['StoryId'] ?? null;
     $UserId = $AuthUserId;
     $SortOrder = $Input['SortOrder'] ?? 'asc';
@@ -42,6 +43,8 @@ try {
     }
 
     $Pdo = Database::GetConnection();
+    require_once __DIR__.'/../Common/WorkDocumentAccess.php';
+    WorkDocumentAccess::Check($Pdo,$WorkId,(string)$AuthUserId,$IsAuthAdmin);
 
     $WorkStmt = $Pdo->prepare('SELECT workTitle FROM WorkInfo WHERE workId = :workId');
     $WorkStmt->execute([':workId' => $WorkId]);
@@ -61,7 +64,7 @@ try {
 
     $OrderDirection = $SortOrder === 'desc' ? 'DESC' : 'ASC';
     $StoryStmt = $Pdo->prepare("
-        SELECT sr.indexNum, COALESCE(c.charaName, sr.narrator) AS narrator, sr.content
+        SELECT sr.indexNum, COALESCE(c.charaName, sr.narrator) AS narrator, sr.actionLine, sr.content
         FROM StoryRows sr
         LEFT JOIN CharacterInfo c ON c.charaId = sr.narratorCharaId
         WHERE sr.storyId = :storyId
@@ -72,7 +75,7 @@ try {
 
     if ($ExportType === 'html') {
         $Rows = array_map(static fn(array $Row): array => [
-            'Heading' => $Row['indexnum'] . '. ' . ($Row['narrator'] ? '語り手: ' . $Row['narrator'] : 'ナレーション'),
+            'Heading' => NarrativeText::StoryHeading($Row),
             'Content' => $Row['content'] ?? ''
         ], $Stories);
         Logger::Info($FunctionName, 'HTML出力処理終了', $UserId);
@@ -105,8 +108,7 @@ try {
     }
 
     foreach ($Stories as $Story) {
-        $text = $Story['indexnum'] . '. ';
-        $text .= ($Story['narrator'] ? '語り手: ' . $Story['narrator'] : 'ナレーション');
+        $text = NarrativeText::StoryHeading($Story);
         $section->addText($text, $FontStyleBold);
         $content = $Story['content'] ?? '';
         if ($NewLine && strpos($content, "\n") !== false) {

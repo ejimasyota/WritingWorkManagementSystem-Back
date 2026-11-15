@@ -28,8 +28,31 @@ $UserId = '';
 try {
     $Input = Response::GetJsonInput();
     $Mode = $Input['Mode'] ?? 'row';
+    if ($Mode === 'bundle') {
+        $UserId = $AuthUserId;
+        Logger::Info('掛け合い', '一括保存処理開始', (string)$UserId);
+        require_once __DIR__ . '/../Common/NarrativeBundle.php';
+        $Pdo = Database::GetConnection();
+        try {
+            WorkDocumentAccess::Check($Pdo, (string)$AuthWorkId, (string)$AuthUserId, $IsAuthAdmin, true);
+            $Pdo->beginTransaction();
+            $Saved = NarrativeBundle::Save($Pdo, 'Exchange', (string)$AuthWorkId, (string)$AuthUserId, $Input);
+            $Pdo->commit();
+        } catch (Throwable $Error) {
+            if ($Pdo->inTransaction()) $Pdo->rollBack();
+            if ($Error instanceof InvalidArgumentException || in_array($Error->getCode(), [403,404,409], true)) Response::Error($Error->getMessage(), $Error->getCode() ?: 400);
+            throw $Error;
+        }
+        Logger::Info('掛け合い', '一括保存処理終了', (string)$UserId);
+        Response::Success($Saved);
+    }
     $WorkId = $AuthWorkId ?? '';
     $UserId = $AuthUserId;
+    $ActionLine = !empty($Input['ActionLine']);
+    if ($ActionLine) {
+        foreach (['Narrator','NarratorCharaId','Speaker','CharaId','SerifId','Feeling'] as $Key) $Input[$Key] = null;
+        $Input['Monologue'] = false;
+    }
     $ExchangeId = $Input['ExchangeId'] ?? null;
     $ExchangeRowId = $Input['ExchangeRowId'] ?? null;
     $ExchangeName = trim($Input['ExchangeName'] ?? '');
@@ -257,10 +280,10 @@ try {
 
             $Stmt = $Pdo->prepare("
                 INSERT INTO ExchangeRows (
-                    exchangeId, indexNum, charaId, speaker, serifId, content, monologue, feeling,
+                    exchangeId, indexNum, charaId, speaker, serifId, content, monologue, actionLine, feeling,
                     registDate, updateDate, registUser, updateUser
                 ) VALUES (
-                    :exchangeId, :indexNum, :charaId, :speaker, :serifId, :content, :monologue, :feeling,
+                    :exchangeId, :indexNum, :charaId, :speaker, :serifId, :content, :monologue, :actionLine, :feeling,
                     CURRENT_TIMESTAMP(3), CURRENT_TIMESTAMP(3), :registUser, :updateUser
                 )
                 RETURNING exchangeRowId, updateDate
@@ -273,6 +296,7 @@ try {
                 ':serifId' => $SerifId,
                 ':content' => $Content,
                 ':monologue' => $Monologue ? 't' : 'f',
+                ':actionLine' => $ActionLine ? 't' : 'f',
                 ':feeling' => $Feeling,
                 ':registUser' => $UserId,
                 ':updateUser' => $UserId
@@ -288,7 +312,7 @@ try {
             /* 楽観ロックチェック：並び順の入替でupdateDateが先に書き換わるため、
              * 入替前の時点で一致を判定する（ストーリー行と同じ扱い） */
             $CurrentRowStmt = $Pdo->prepare("
-                SELECT r.exchangeRowId, r.indexNum, r.charaId, r.speaker, r.serifId, r.content, r.feeling,
+                SELECT r.exchangeRowId, r.indexNum, r.charaId, r.speaker, r.serifId, r.content, r.feeling, r.actionLine,
                        c.charaName AS charaName, s.content AS serifContent
                 FROM ExchangeRows r
                 LEFT JOIN CharacterInfo c ON r.charaId = c.charaId
@@ -393,6 +417,7 @@ try {
                     serifId = :serifId,
                     content = :content,
                     monologue = :monologue,
+                    actionLine = :actionLine,
                     feeling = :feeling,
                     updateDate = CURRENT_TIMESTAMP(3),
                     updateUser = :updateUser
@@ -408,6 +433,7 @@ try {
                 ':serifId' => $SerifId,
                 ':content' => $Content,
                 ':monologue' => $Monologue ? 't' : 'f',
+                ':actionLine' => $ActionLine ? 't' : 'f',
                 ':feeling' => $Feeling,
                 ':updateUser' => $UserId
             ]);
@@ -419,11 +445,13 @@ try {
                 'speaker' => '発言者',
                 'content' => 'セリフ',
                 'feeling' => '心境',
+                'actionLine' => '動作描写行',
             ];
             $OldDisplay = [
                 'speaker' => $CurrentRow['charaname']    ?? ($CurrentRow['speaker'] ?? null),
                 'content' => $CurrentRow['serifcontent'] ?? ($CurrentRow['content'] ?? null),
                 'feeling' => $CurrentRow['feeling']      ?? null,
+                'actionLine' => !empty($CurrentRow['actionline']) ? 'あり' : 'なし',
             ];
             /* 新しい発言者名・セリフ内容を解決する（未変更なら旧値を再利用） */
             $NewSpeakerDisplay = $Speaker;
@@ -452,6 +480,7 @@ try {
                 'speaker' => $NewSpeakerDisplay,
                 'content' => $NewContentDisplay,
                 'feeling' => $Feeling,
+                'actionLine' => $ActionLine ? 'あり' : 'なし',
             ];
             $Detail = HistoryDetail::Update($OwnerRow['exchangename'] ?? null, $OldDisplay, $NewDisplay, $Labels);
         }

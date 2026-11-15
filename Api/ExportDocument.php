@@ -19,6 +19,7 @@
 // 1. データベース接続クラス
 require_once __DIR__ . '/../Common/Database.php';
 require_once __DIR__ . '/../Common/HtmlDocument.php';
+require_once __DIR__ . '/../Common/NarrativeText.php';
 // 2. ログ出力クラス
 require_once __DIR__ . '/../Common/Logger.php';
 // 3. レスポンスクラス
@@ -1438,6 +1439,7 @@ function GetSerifInfo(PDO $Pdo, string $WorkId, string $OrderDirection): array {
         SELECT
             c.charaName AS \"CharaName\",
             s.content AS \"Content\",
+            s.monologue AS \"Monologue\",
             s.situation AS \"Situation\"
         FROM SerifInfo s
         LEFT JOIN CharacterInfo c ON s.charaId = c.charaId
@@ -1453,6 +1455,8 @@ function GetSerifInfo(PDO $Pdo, string $WorkId, string $OrderDirection): array {
      * 2. 戻り値返却
      * ------------------------------*/
     // 1. セリフ情報を返却
+    foreach ($Serifs as &$Serif) $Serif['Content'] = NarrativeText::Monologue($Serif['Content'], !empty($Serif['Monologue']));
+    unset($Serif);
     return $Serifs;
 }
 
@@ -1499,7 +1503,9 @@ function GetExchangeRowInfo(PDO $Pdo, string $WorkId): array {
             r.exchangeId AS \"ExchangeId\",
             r.indexNum AS \"IndexNum\",
             COALESCE(c.charaName, r.speaker) AS \"Speaker\",
-            COALESCE(s.content, r.content) AS \"Content\",
+            CASE WHEN r.actionLine THEN r.content ELSE COALESCE(s.content, r.content) END AS \"Content\",
+            r.actionLine AS \"ActionLine\",
+            COALESCE(s.monologue, r.monologue) AS \"Monologue\",
             r.feeling AS \"Feeling\"
         FROM ExchangeRows r
         INNER JOIN ExchangeInfo e ON r.exchangeId = e.exchangeId
@@ -1521,6 +1527,9 @@ function GetExchangeRowInfo(PDO $Pdo, string $WorkId): array {
 
     /* 掛け合いIDごとに行をまとめる */
     foreach ($ExchangeRows as $ExchangeRow) {
+        if (!empty($ExchangeRow['ActionLine'])) {
+            $ExchangeRow['Speaker'] = ''; $ExchangeRow['Feeling'] = '';
+        } else $ExchangeRow['Content'] = NarrativeText::Monologue($ExchangeRow['Content'], !empty($ExchangeRow['Monologue']));
         // 1. 掛け合いIDを取得
         $ExchangeId = (string)$ExchangeRow['ExchangeId'];
         // 2. 掛け合い行を保持
@@ -2166,12 +2175,7 @@ function ExportWordDocument(
                 } else {
                     $ExchangeTableRows = [];
                     foreach ($Rows as $RowIndex => $Row) {
-                        $ExchangeTableRows[] = [
-                            (string) ($RowIndex + 1),
-                            DisplayValue($Row['Speaker']),
-                            $Row['Content'],
-                            $Row['Feeling'],
-                        ];
+                        $ExchangeTableRows[] = NarrativeText::ExchangeCells($Row, $RowIndex + 1);
                     }
                     AddListTable(
                         $section,
@@ -2594,7 +2598,7 @@ function ExportHtml(
         $Rows = $ExportData->ExchangeRowInfo[(string)$Exchange['ExchangeId']] ?? [];
         if (!$Rows) return $Html . $DetailTable([['掛け合い', null]]);
         $TableRows = [];
-        foreach ($Rows as $I => $R) $TableRows[] = [(string)($I + 1), $Display($R['Speaker']), $R['Content'], $R['Feeling']];
+        foreach ($Rows as $I => $R) $TableRows[] = NarrativeText::ExchangeCells($R, $I + 1);
         return $Html . $ListTable(['No.','発言者','セリフ','心境'], $TableRows);
     });
 

@@ -19,7 +19,7 @@ try {
         return;
     }
     $Input = Response::GetJsonInput();
-    $WorkId = $AuthWorkId ?? '';
+    $WorkId = (string)($Input['WorkId'] ?? $AuthWorkId ?? '');
     $PlotId = $Input['PlotId'] ?? null;
     $UserId = $AuthUserId;
     $SortOrder = $Input['SortOrder'] ?? 'asc';
@@ -42,6 +42,8 @@ try {
     }
 
     $Pdo = Database::GetConnection();
+    require_once __DIR__.'/../Common/WorkDocumentAccess.php';
+    WorkDocumentAccess::Check($Pdo,$WorkId,(string)$AuthUserId,$IsAuthAdmin);
 
     $WorkStmt = $Pdo->prepare('SELECT workTitle FROM WorkInfo WHERE workId = :workId');
     $WorkStmt->execute([':workId' => $WorkId]);

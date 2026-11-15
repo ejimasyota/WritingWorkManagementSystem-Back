@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * SaveStory.php
  * ストーリー登録・更新API
@@ -26,6 +26,29 @@ $UserId = '';
 try {
     $Input = Response::GetJsonInput();
     $Mode = $Input['Mode'] ?? 'row';
+    if ($Mode === 'bundle') {
+        $UserId = $AuthUserId;
+        Logger::Info('ストーリー作成', '一括保存処理開始', (string)$UserId);
+        require_once __DIR__ . '/../Common/NarrativeBundle.php';
+        $Pdo = Database::GetConnection();
+        try {
+            WorkDocumentAccess::Check($Pdo, (string)$AuthWorkId, (string)$AuthUserId, $IsAuthAdmin, true);
+            $Pdo->beginTransaction();
+            $Saved = NarrativeBundle::Save($Pdo, 'Story', (string)$AuthWorkId, (string)$AuthUserId, $Input);
+            $Pdo->commit();
+        } catch (Throwable $Error) {
+            if ($Pdo->inTransaction()) $Pdo->rollBack();
+            if ($Error instanceof InvalidArgumentException || in_array($Error->getCode(), [403,404,409], true)) Response::Error($Error->getMessage(), $Error->getCode() ?: 400);
+            throw $Error;
+        }
+        Logger::Info('ストーリー作成', '一括保存処理終了', (string)$UserId);
+        Response::Success($Saved);
+    }
+    $ActionLine = !empty($Input['ActionLine']);
+    if ($ActionLine) {
+        foreach (['Narrator','NarratorCharaId','Speaker','CharaId','SerifId','Feeling'] as $Key) $Input[$Key] = null;
+        $Input['Monologue'] = false;
+    }
     $StoryId = $Input['StoryId'] ?? null;
     $StoryRowId = $Input['StoryRowId'] ?? null;
     $StoryName = trim($Input['StoryName'] ?? '');
@@ -286,10 +309,10 @@ try {
 
             $Sql = "
                 INSERT INTO StoryRows (
-                    storyId, indexNum, narrator, narratorCharaId, monologue, content,
+                    storyId, indexNum, narrator, narratorCharaId, monologue, actionLine, content,
                     registDate, updateDate, registUser, updateUser
                 ) VALUES (
-                    :storyId, :indexNum, :narrator, :narratorCharaId, :monologue, :content,
+                    :storyId, :indexNum, :narrator, :narratorCharaId, :monologue, :actionLine, :content,
                     CURRENT_TIMESTAMP(3), CURRENT_TIMESTAMP(3), :registUser, :updateUser
                 )
                 RETURNING storyRowId, updateDate
@@ -301,6 +324,7 @@ try {
                 ':narrator' => $Narrator,
                 ':narratorCharaId' => $NarratorCharaId,
                 ':monologue' => $Monologue ? 't' : 'f',
+                ':actionLine' => $ActionLine ? 't' : 'f',
                 ':content' => $Content,
                 ':registUser' => $UserId,
                 ':updateUser' => $UserId
@@ -314,7 +338,7 @@ try {
             // 楽観ロックチェック：本UPDATEの前段に並び順入替が走るとupdateDateが先に書き換わるため、
             // 入替前の時点でupdateDate一致を判定する。
             $CurrentRowStmt = $Pdo->prepare("
-                SELECT sr.storyRowId, sr.indexNum, sr.narrator, sr.narratorCharaId, sr.monologue, sr.content,
+                SELECT sr.storyRowId, sr.indexNum, sr.narrator, sr.narratorCharaId, sr.monologue, sr.actionLine, sr.content,
                        c.charaName AS narratorCharaName
                 FROM StoryRows sr
                 LEFT JOIN CharacterInfo c ON sr.narratorCharaId = c.charaId
@@ -413,6 +437,7 @@ try {
                     narrator = :narrator,
                     narratorCharaId = :narratorCharaId,
                     monologue = :monologue,
+                    actionLine = :actionLine,
                     content = :content,
                     updateDate = CURRENT_TIMESTAMP(3),
                     updateUser = :updateUser
@@ -427,6 +452,7 @@ try {
                 ':narrator' => $Narrator,
                 ':narratorCharaId' => $NarratorCharaId,
                 ':monologue' => $Monologue ? 't' : 'f',
+                ':actionLine' => $ActionLine ? 't' : 'f',
                 ':content' => $Content,
                 ':updateUser' => $UserId
             ]);
@@ -440,12 +466,14 @@ try {
                 'narratorCharaId' => '語り手（キャラ）',
                 'narrator'        => '語り手',
                 'monologue'       => 'モノローグ',
+                'actionLine' => '動作描写行',
                 'content'         => '内容',
             ];
             $OldDisplay = [
                 'narratorCharaId' => $CurrentRow['narratorcharaname'] ?? null,
                 'narrator'        => $CurrentRow['narrator']          ?? null,
                 'monologue'       => CodeLabel::Bool($CurrentRow['monologue'] ?? null),
+                'actionLine' => CodeLabel::Bool($CurrentRow['actionline'] ?? null),
                 'content'         => $CurrentRow['content']           ?? null,
             ];
             // narratorCharaId の新名称解決（変更が無ければ旧名称を再利用、null時null）
@@ -466,6 +494,7 @@ try {
                 'narratorCharaId' => $NewNarratorCharaName,
                 'narrator'        => $Narrator,
                 'monologue'       => CodeLabel::Bool($Monologue),
+                'actionLine' => CodeLabel::Bool($ActionLine),
                 'content'         => $Content,
             ];
             $Detail = HistoryDetail::Update($Content, $OldDisplay, $NewDisplay, $Labels);

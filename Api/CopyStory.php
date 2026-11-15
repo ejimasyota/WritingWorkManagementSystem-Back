@@ -88,7 +88,7 @@ try {
     $NewUpdateDate = $NewInfo['updatedate'];
 
     $SourceRowsStmt = $Pdo->prepare("
-        SELECT indexNum, narrator, narratorCharaId, monologue, content
+        SELECT indexNum, narrator, narratorCharaId, monologue, actionLine, content
         FROM StoryRows
         WHERE storyId = :storyId
         ORDER BY indexNum ASC
@@ -99,10 +99,10 @@ try {
     if (!empty($SourceRows)) {
         $InsertRowStmt = $Pdo->prepare("
             INSERT INTO StoryRows (
-                storyId, indexNum, narrator, narratorCharaId, monologue, content,
+                storyId, indexNum, narrator, narratorCharaId, monologue, actionLine, content,
                 registDate, updateDate, registUser, updateUser
             ) VALUES (
-                :storyId, :indexNum, :narrator, :narratorCharaId, :monologue, :content,
+                :storyId, :indexNum, :narrator, :narratorCharaId, :monologue, :actionLine, :content,
                 CURRENT_TIMESTAMP(3), CURRENT_TIMESTAMP(3), :registUser, :updateUser
             )
         ");
@@ -116,6 +116,7 @@ try {
                 ':narrator' => $Narrator,
                 ':narratorCharaId' => $NarratorCharaId,
                 ':monologue' => !empty($Row['monologue']) ? 't' : 'f',
+                ':actionLine' => !empty($Row['actionline']) ? 't' : 'f',
                 ':content' => $Row['content'],
                 ':registUser' => $UserId,
                 ':updateUser' => $UserId

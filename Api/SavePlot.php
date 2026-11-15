@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * SavePlot.php
  * プロット登録・更新API
@@ -26,6 +26,24 @@ $UserId = '';
 try {
     $Input = Response::GetJsonInput();
     $Mode = $Input['Mode'] ?? 'row';
+    if ($Mode === 'bundle') {
+        $UserId = $AuthUserId;
+        Logger::Info('プロット作成', '一括保存処理開始', (string)$UserId);
+        require_once __DIR__ . '/../Common/NarrativeBundle.php';
+        $Pdo = Database::GetConnection();
+        try {
+            WorkDocumentAccess::Check($Pdo, (string)$AuthWorkId, (string)$AuthUserId, $IsAuthAdmin, true);
+            $Pdo->beginTransaction();
+            $Saved = NarrativeBundle::Save($Pdo, 'Plot', (string)$AuthWorkId, (string)$AuthUserId, $Input);
+            $Pdo->commit();
+        } catch (Throwable $Error) {
+            if ($Pdo->inTransaction()) $Pdo->rollBack();
+            if ($Error instanceof InvalidArgumentException || in_array($Error->getCode(), [403,404,409], true)) Response::Error($Error->getMessage(), $Error->getCode() ?: 400);
+            throw $Error;
+        }
+        Logger::Info('プロット作成', '一括保存処理終了', (string)$UserId);
+        Response::Success($Saved);
+    }
     $PlotId = $Input['PlotId'] ?? null;
     $PlotRowId = $Input['PlotRowId'] ?? null;
     $PlotName = trim($Input['PlotName'] ?? '');

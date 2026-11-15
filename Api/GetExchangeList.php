@@ -76,6 +76,7 @@ try {
             e.workId AS \"WorkId\",
             e.exchangeName AS \"ExchangeName\",
             e.description AS \"Description\",
+            (SELECT COUNT(*) FROM ExchangeRows r WHERE r.exchangeId = e.exchangeId) AS \"RowCount\",
             e.registDate AS \"RegistDate\",
             e.updateDate AS \"UpdateDate\",
             e.registUser AS \"RegistUser\",
@@ -98,7 +99,8 @@ try {
     $CharaSql = "
         SELECT
             charaId AS \"CharaId\",
-            charaName AS \"CharaName\"
+            charaName AS \"CharaName\",
+            imgPath AS \"ImgPath\"
         FROM CharacterInfo
         WHERE workId = :workId
         ORDER BY charaName ASC
@@ -118,7 +120,8 @@ try {
         SELECT
             s.serifId AS \"SerifId\",
             s.charaId AS \"CharaId\",
-            s.content AS \"Content\"
+            s.content AS \"Content\",
+            s.monologue AS \"Monologue\"
         FROM SerifInfo s
         WHERE s.workId = :workId
         ORDER BY s.registDate DESC
@@ -169,6 +172,8 @@ try {
                     s.content AS \"SerifContent\",
                     r.content AS \"Content\",
                     r.monologue AS \"Monologue\",
+                    r.actionLine AS \"ActionLine\",
+                    s.monologue AS \"SerifMonologue\",
                     r.feeling AS \"Feeling\",
                     r.registDate AS \"RegistDate\",
                     r.updateDate AS \"UpdateDate\",

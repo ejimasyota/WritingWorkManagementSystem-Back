@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * GetPlotList.php
  * プロット一覧取得API
@@ -109,6 +109,7 @@ try {
         'PlotRowList' => $PlotRowList,
         /* 作品のジャンルに対応するテンプレートが無い場合、
          * プロット作成ダイアログの「テンプレートから作成」は表示しない */
+        'TemplateRows' => TemplateMaster::ParseRows(TemplateMaster::GetTemplateText($Pdo, $WorkId, TemplateMaster::DIVISION_PLOT)),
         'HasTemplate' => TemplateMaster::Exists($Pdo, $WorkId, TemplateMaster::DIVISION_PLOT),
         'TotalCount' => count($PlotList)
     ]);

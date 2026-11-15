@@ -272,6 +272,14 @@
       ]
     },
     {
+      "MenuId": "MenuExchange",
+      "ScreenName": "掛け合い",
+      "Tables": [{
+        "TableName": "exchangeinfo", "RowIdColumn": "exchangeid", "WorkIdColumn": "workid",
+        "SearchableColumns": [{"Column": "exchangename", "Label": "掛け合い名"}, {"Column": "description", "Label": "概要"}]
+      }]
+    },
+    {
       "MenuId": "MenuStory",
       "ScreenName": "ストーリー行作成",
       "Tables": [

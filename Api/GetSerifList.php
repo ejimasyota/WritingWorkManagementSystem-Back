@@ -40,6 +40,7 @@ try {
             s.charaId AS \"CharaId\",
             c.charaName AS \"CharaName\",
             s.content AS \"Content\",
+            s.monologue AS \"Monologue\",
             s.situation AS \"Situation\",
             s.registDate AS \"RegistDate\",
             s.updateDate AS \"UpdateDate\",

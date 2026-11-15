@@ -27,6 +27,7 @@ try {
     $CharaId = $Input['CharaId'] ?? null;
     $Content = $Input['Content'] ?? '';
     $Situation = $Input['Situation'] ?? null;
+    $Monologue = !empty($Input['Monologue']);
     $UserId = $AuthUserId;
     $UpdateDate = $Input['UpdateDate'] ?? null;
 
@@ -70,10 +71,10 @@ try {
         /** 新規登録 */
         $Sql = "
             INSERT INTO SerifInfo (
-                workId, charaId, content, situation,
+                workId, charaId, content, situation, monologue,
                 registDate, updateDate, registUser, updateUser
             ) VALUES (
-                :workId, :charaId, :content, :situation,
+                :workId, :charaId, :content, :situation, :monologue,
                 CURRENT_TIMESTAMP(3), CURRENT_TIMESTAMP(3), :registUser, :updateUser
             )
             RETURNING serifId, updateDate
@@ -85,6 +86,7 @@ try {
             ':charaId' => $CharaId,
             ':content' => $Content,
             ':situation' => $Situation,
+            ':monologue' => $Monologue ? 't' : 'f',
             ':registUser' => $UserId,
             ':updateUser' => $UserId
         ]);
@@ -99,7 +101,7 @@ try {
     } else {
         /** 差分履歴用：更新前の表示値を取得（FK charaId は名称へ解決） */
         $OldRowStmt = $Pdo->prepare("
-            SELECT s.charaId, c.charaName, s.content, s.situation
+            SELECT s.charaId, c.charaName, s.content, s.situation, s.monologue
             FROM SerifInfo s
             LEFT JOIN CharacterInfo c ON s.charaId = c.charaId
             WHERE s.serifId = :serifId AND s.workId = :workId
@@ -115,6 +117,7 @@ try {
                 charaId = :charaId,
                 content = :content,
                 situation = :situation,
+                monologue = :monologue,
                 updateDate = CURRENT_TIMESTAMP(3),
                 updateUser = :updateUser
             WHERE serifId = :serifId AND workId = :workId AND updateDate = :updateDate
@@ -128,6 +131,7 @@ try {
             ':charaId' => $CharaId,
             ':content' => $Content,
             ':situation' => $Situation,
+            ':monologue' => $Monologue ? 't' : 'f',
             ':updateUser' => $UserId,
             ':updateDate' => $UpdateDate
         ]);
@@ -147,12 +151,14 @@ try {
             'charaId'   => 'キャラクター',
             'content'   => '内容',
             'situation' => '状況',
+            'monologue' => 'モノローグ',
         ];
         // 更新前の表示値（FKは旧名称）
         $OldDisplay = [
             'charaId'   => $OldRow['charaname'] ?? null,
             'content'   => $OldRow['content']   ?? null,
             'situation' => $OldRow['situation'] ?? null,
+            'monologue' => !empty($OldRow['monologue']) ? 'あり' : 'なし',
         ];
         // 更新後の表示値（FKは新id→名称解決。新id==旧idは旧名称を再利用）
         $NewCharaName = ((string) ($CharaId ?? '') === (string) ($OldRow['charaid'] ?? ''))
@@ -162,6 +168,7 @@ try {
             'charaId'   => $NewCharaName,
             'content'   => $Content,
             'situation' => $Situation,
+            'monologue' => $Monologue ? 'あり' : 'なし',
         ];
         $Detail = HistoryDetail::Update($Content, $OldDisplay, $NewDisplay, $Labels);
     }
