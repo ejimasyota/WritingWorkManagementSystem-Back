@@ -58,10 +58,6 @@ class CharacterAffiliation
     public static function Prepare(PDO $Pdo, string $WorkId, $Value, $Previous): array
     {
         $Rows = self::Parse($Value);
-        // 読込・帳票では移行データの未設定日を許容し、新規・更新保存では必須にする。
-        foreach ($Rows as $Row) {
-            if ($Row['JoinedDate'] === '') throw new InvalidArgumentException('加入年月日を入力してください');
-        }
         $Old = self::Parse($Previous);
         $Maps = [];
         foreach (self::MASTERS as [$Table, $Id, $Name]) {

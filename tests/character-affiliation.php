@@ -40,8 +40,8 @@ AffiliationCheck($Rows[0]['OrgName'] === '組織' && $Rows[0]['TeamName'] === '�
 AffiliationCheck(count($Db->Queries) === 3 && count(array_filter($Db->Queries, fn($Sql) => str_contains($Sql, 'FOR SHARE'))) === 3, '行数に依存しない問い合わせと削除競合の防止');
 $Migrated = ['Affiliations' => [array_replace($Row, ['JoinedDate' => '', 'LeftDate' => ''])]];
 AffiliationCheck(CharacterAffiliation::Parse($Migrated)[0]['JoinedDate'] === '', '日付未設定の移行行は読み込める');
-AffiliationReject(fn() => CharacterAffiliation::Prepare($Db, 'work', $Migrated, $Migrated));
-AffiliationReject(fn() => CharacterAffiliation::Prepare($Db, 'work', ['Affiliations' => [array_replace($Row, ['JoinedDate' => '   '])]], null));
+AffiliationCheck(CharacterAffiliation::Prepare($Db, 'work', $Migrated, $Migrated)[0]['JoinedDate'] === '', '加入年月日は任意');
+AffiliationCheck(CharacterAffiliation::Prepare($Db, 'work', ['Affiliations' => [array_replace($Row, ['JoinedDate' => '   '])]], null)[0]['JoinedDate'] === '', '空白の加入年月日は未設定として保存する');
 $Encoded = CharacterAffiliation::Encode($Rows);
 AffiliationCheck(CharacterAffiliation::Parse($Encoded) === $Rows, 'JSONを損失なく再読込する');
 AffiliationCheck(str_contains(CharacterAffiliation::FormatLines($Encoded), '<備考>'), '帳票と更新履歴に備考を含む');

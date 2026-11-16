@@ -51,8 +51,8 @@ try {
 
     /** 空文字をNULLに変換 */
     $CaleId = !empty($CaleId) ? $CaleId : null;
-    $StartYear = !empty($StartYear) ? $StartYear : null;
-    $EndYear = !empty($EndYear) ? $EndYear : null;
+    $StartYear = $StartYear === '' || $StartYear === null ? null : $StartYear;
+    $EndYear = $EndYear === '' || $EndYear === null ? null : $EndYear;
     $Description = !empty($Description) ? $Description : null;
 
     if (empty($CaleId)) {
